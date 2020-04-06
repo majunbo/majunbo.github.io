@@ -5,9 +5,9 @@
   <subtitle>学习云服务\Linux\鲲鹏等技术</subtitle>
   <link href="majunbo.github.io/atom.xml" rel="self"/>
   
-  <link href="https://majunbo.github.io/"/>
+  <link href="https://majunbo.top/"/>
   <updated>2020-04-05T14:00:17.198Z</updated>
-  <id>https://majunbo.github.io/</id>
+  <id>https://majunbo.top/</id>
   
   <author>
     <name>鲲鹏小哪吒 120442759@qq.com</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>华为欧拉系统 euleros</title>
-    <link href="https://majunbo.github.io/20200405/testEuler/"/>
-    <id>https://majunbo.github.io/20200405/testEuler/</id>
+    <link href="https://majunbo.top/20200405/testEuler/"/>
+    <id>https://majunbo.top/20200405/testEuler/</id>
     <published>2020-04-05T12:55:49.000Z</published>
     <updated>2020-04-05T14:00:17.198Z</updated>
     
@@ -36,14 +36,14 @@
     
     
     
-      <category term="euler" scheme="https://majunbo.github.io/tags/euler/"/>
+      <category term="euler" scheme="https://majunbo.top/tags/euler/"/>
     
   </entry>
   
   <entry>
     <title>用hexo框架搭建静态博客</title>
-    <link href="https://majunbo.github.io/20200405/hexo-install/"/>
-    <id>https://majunbo.github.io/20200405/hexo-install/</id>
+    <link href="https://majunbo.top/20200405/hexo-install/"/>
+    <id>https://majunbo.top/20200405/hexo-install/</id>
     <published>2020-04-05T11:53:45.000Z</published>
     <updated>2020-04-05T14:01:55.308Z</updated>
     
@@ -60,14 +60,14 @@
     
     
     
-      <category term="hexo" scheme="https://majunbo.github.io/tags/hexo/"/>
+      <category term="hexo" scheme="https://majunbo.top/tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://majunbo.github.io/20200403/hello-world/"/>
-    <id>https://majunbo.github.io/20200403/hello-world/</id>
+    <link href="https://majunbo.top/20200403/hello-world/"/>
+    <id>https://majunbo.top/20200403/hello-world/</id>
     <published>2020-04-03T05:40:45.000Z</published>
     <updated>2020-04-05T14:00:44.598Z</updated>
     
@@ -84,7 +84,7 @@
     
     
     
-      <category term="hexo" scheme="https://majunbo.github.io/tags/hexo/"/>
+      <category term="hexo" scheme="https://majunbo.top/tags/hexo/"/>
     
   </entry>
   
