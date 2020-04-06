@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>鲲鹏技术布道</title>
   
-  <subtitle>学习云服务\Linux\鲲鹏等技术</subtitle>
+  <subtitle>云服务\Linux\鲲鹏等技术</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://majunbo.top/"/>
@@ -10,7 +10,7 @@
   <id>http://majunbo.top/</id>
   
   <author>
-    <name>鲲鹏小哪吒 120442759@qq.com</name>
+    <name>鲲鹏小哪吒</name>
     
   </author>
   
