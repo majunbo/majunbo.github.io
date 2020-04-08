@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://majunbo.top/"/>
-  <updated>2020-04-06T07:12:24.382Z</updated>
+  <updated>2020-04-08T06:31:17.475Z</updated>
   <id>http://majunbo.top/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test_from_mjb</title>
+    <link href="http://majunbo.top/20200408/test-from-mjb/"/>
+    <id>http://majunbo.top/20200408/test-from-mjb/</id>
+    <published>2020-04-08T06:30:53.000Z</published>
+    <updated>2020-04-08T06:31:17.475Z</updated>
+    
+    <content type="html"><![CDATA[<p>This is a test</p><p>good by.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;This is a test&lt;/p&gt;
+&lt;p&gt;good by.&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>华为欧拉系统 euleros</title>

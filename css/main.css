@@ -14,7 +14,7 @@ body {
   color: #3c4858;
 }
 body a {
-  color: #3c4858;
+  color: #E53A40;
   text-decoration: none;
   cursor: pointer;
   transition-duration: 0.2s;
@@ -482,12 +482,12 @@ a.beian-police img {
 .navbar {
   background-color: transparent;
   font-size: 0.875rem;
-  color: #3c4858;
+  color: white;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
   -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 }
 .navbar a {
-  color: #3c4858;
+  color: white;
 }
 .navbar a:hover {
   background-color: rgba(0,0,0,0.1);
@@ -522,10 +522,10 @@ a.beian-police img {
   padding-bottom: 5px;
 }
 .navbar-custom {
-  color: #3c4858;
+  color: white;
 }
 .navbar-custom a {
-  color: #3c4858;
+  color: white;
 }
 .top-nav-collapse {
   background-color: #2f4154;
