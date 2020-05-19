@@ -4,18 +4,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>匍匐鲲鹏</title>
+  <title>鲲鹏服务器实验二：MySQL5.X 编译安装 | 匍匐鲲鹏</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学习基于华为云鲲鹏云服务的网站系统">
-<meta property="og:type" content="website">
-<meta property="og:title" content="匍匐鲲鹏">
-<meta property="og:url" content="https://majunbo.top/index.html">
+  <meta name="description" content="一、安装依赖123yum install -y bison* ncurses* openssl-devel cmake# or 安装完成后手贡编译新版本的cmakeyum install -y bison* ncurses* openssl-devel bzip2 wget  CMake是一个跨平台的安装&#x2F;编译工具 1234567891011cd &#x2F;usr&#x2F;local&#x2F;srcwget https:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鲲鹏服务器实验二：MySQL5.X 编译安装">
+<meta property="og:url" content="https://majunbo.top/20200518/kunpeng02-mysql/index.html">
 <meta property="og:site_name" content="匍匐鲲鹏">
-<meta property="og:description" content="学习基于华为云鲲鹏云服务的网站系统">
+<meta property="og:description" content="一、安装依赖123yum install -y bison* ncurses* openssl-devel cmake# or 安装完成后手贡编译新版本的cmakeyum install -y bison* ncurses* openssl-devel bzip2 wget  CMake是一个跨平台的安装&#x2F;编译工具 1234567891011cd &#x2F;usr&#x2F;local&#x2F;srcwget https:">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-18T13:49:52.000Z">
+<meta property="article:modified_time" content="2020-05-19T07:06:39.501Z">
 <meta property="article:author" content="鲲鹏小哪吒">
-<meta property="article:tag" content="majunbo，华为云，鲲鹏云服务，majunbo.top，majunbo.github.io">
-<meta property="article:tag" content="linux，technology">
+<meta property="article:tag" content="kunpeng">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="匍匐鲲鹏" type="application/atom+xml">
@@ -76,9 +77,7 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-    <article id="post-kunpeng02-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-kunpeng02-mysql" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/20200518/kunpeng02-mysql/" class="article-date">
   <time datetime="2020-05-18T13:49:52.000Z" itemprop="datePublished">2020-05-18</time>
@@ -91,8 +90,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/20200518/kunpeng02-mysql/">鲲鹏服务器实验二：MySQL5.X 编译安装</a>
+    <h1 class="article-title" itemprop="name">
+      鲲鹏服务器实验二：MySQL5.X 编译安装
     </h1>
   
 
@@ -215,204 +214,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-kunpeng01-gcc" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/20200505/kunpeng01-gcc/" class="article-date">
-  <time datetime="2020-05-05T12:55:49.000Z" itemprop="datePublished">2020-05-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/20200505/kunpeng01-gcc/">鲲鹏服务器实验一：GCC编译安装</a>
-    </h1>
+    <a href="/20200505/kunpeng01-gcc/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">鲲鹏服务器实验一：GCC编译安装</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>华为官网已经有了相关的教材和资料，可参考：<a href="https://www.huaweicloud.com/kunpeng/software/gcc.html" target="_blank" rel="noopener">https://www.huaweicloud.com/kunpeng/software/gcc.html</a></p>
-</blockquote>
-<p>国内第三方GCC的帮助网站：<a href="http://c.biancheng.net/gcc/" target="_blank" rel="noopener">http://c.biancheng.net/gcc/</a></p>
-<h2 id="一、安装一台华为鲲鹏服务器"><a href="#一、安装一台华为鲲鹏服务器" class="headerlink" title="一、安装一台华为鲲鹏服务器"></a>一、安装一台华为鲲鹏服务器</h2><p>在北京四、上海一、广州地区购买，其他地区没有鲲鹏服务器（截至2020年4月），可购买CentOS 7。</p>
-<h2 id="二、检查当前系统GCC版本"><a href="#二、检查当前系统GCC版本" class="headerlink" title="二、检查当前系统GCC版本"></a>二、检查当前系统GCC版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
-
-<h2 id="三、安装高版本GCC"><a href="#三、安装高版本GCC" class="headerlink" title="三、安装高版本GCC"></a>三、安装高版本GCC</h2><p>GCC官网：<a href="https://gcc.gnu.org/" target="_blank" rel="noopener">https://gcc.gnu.org/</a><br>GCC 7.5 released [2019-11-14]<br><a href="http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-7.5.0/gcc-7.5.0.tar.gz" target="_blank" rel="noopener">http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-7.5.0/gcc-7.5.0.tar.gz</a><br>GCC 8.4 released [2020-03-04]<br><a href="http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-8.4.0/gcc-8.4.0.tar.gz" target="_blank" rel="noopener">http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-8.4.0/gcc-8.4.0.tar.gz</a></p>
-<p>1、安装依赖包（压缩解压缩程序）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y bzip2 wget</span><br><span class="line">yum install gcc gcc-c++</span><br></pre></td></tr></table></figure>
-
-<p>2、下载 gcc-7.3.0 至/opt 目录下并解压<br>本文以7.3为例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt</span><br><span class="line">wget http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-7.3.0/gcc-7.3.0.tar.gz</span><br><span class="line">tar -zxvf gcc-7.3.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>3、将 gcc 的依赖包拷贝至”gcc-7.3.0”目录下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gcc-7.3需要这些文件：</span></span><br><span class="line">wget https://gcc.gnu.org/pub/gcc/infrastructure/gmp-6.1.0.tar.bz2</span><br><span class="line">wget https://gcc.gnu.org/pub/gcc/infrastructure/isl-0.16.1.tar.bz2</span><br><span class="line">wget https://gcc.gnu.org/pub/gcc/infrastructure/mpc-1.0.3.tar.gz</span><br><span class="line">wget https://gcc.gnu.org/pub/gcc/infrastructure/mpfr-3.1.4.tar.bz2</span><br><span class="line"></span><br><span class="line"><span class="comment"># gcc-8.4需要这些文件：</span></span><br><span class="line">wget https://gcc.gnu.org/pub/gcc/infrastructure/gmp-6.1.0.tar.bz2</span><br><span class="line">wget https://gcc.gnu.org/pub/gcc/infrastructure/isl-0.18.tar.bz2</span><br><span class="line">wget https://gcc.gnu.org/pub/gcc/infrastructure/mpc-1.0.3.tar.gz</span><br><span class="line">wget https://gcc.gnu.org/pub/gcc/infrastructure/mpfr-3.1.4.tar.bz2</span><br></pre></td></tr></table></figure>
-
-<p>4、 进入”gcc-7.3.0”目录，对依赖进行检查</p>
-<p>首先把上面下载的以来文件拷贝”gcc-7.3.0”目录下，再执行download_prerequisites：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> gcc-7.3.0</span><br><span class="line"><span class="comment"># 拷贝依赖包到gcc-7.3.0</span></span><br></pre></td></tr></table></figure>
-
-<p>依赖检查结果如下所示，则依赖正确：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@ecs-kp01 gcc-7.3.0]<span class="comment"># ./contrib/download_prerequisites</span></span><br><span class="line">gmp-6.1.0.tar.bz2: OK</span><br><span class="line">mpfr-3.1.4.tar.bz2: OK</span><br><span class="line">mpc-1.0.3.tar.gz: OK</span><br><span class="line">isl-0.16.1.tar.bz2: OK</span><br><span class="line">All prerequisites downloaded successfully.</span><br></pre></td></tr></table></figure>
-
-<p>5、编译安装 gcc</p>
-<p>执行编译：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mkdir gcc-build-7.3.0</span><br><span class="line"><span class="built_in">cd</span> gcc-build-7.3.0</span><br><span class="line"></span><br><span class="line">../configure --<span class="built_in">enable</span>-checking=release --<span class="built_in">enable</span>-language=c,c++ \</span><br><span class="line">--<span class="built_in">disable</span>-multilib --prefix=/usr</span><br><span class="line"><span class="comment"># or 放到一行</span></span><br><span class="line">../configure --<span class="built_in">enable</span>-checking=release --<span class="built_in">enable</span>-language=c,c++ --<span class="built_in">disable</span>-multilib --prefix=/usr</span><br><span class="line"></span><br><span class="line">nohup make -j`cat /proc/cpuinfo| grep <span class="string">"processor"</span>| wc -l` &amp; //编译时间过长，放至后台执行</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者分批执行下列命令：</span></span><br><span class="line"><span class="comment"># 可通过下述命令查询 CPU 核数：</span></span><br><span class="line">[root@ecs-kp01 gcc-build-7.3.0]<span class="comment"># cat /proc/cpuinfo| grep "processor"| wc -l</span></span><br><span class="line">8</span><br><span class="line">[root@ecs-kp01 gcc-build-7.3.0]<span class="comment"># make -j8</span></span><br><span class="line"><span class="comment"># "-j"参数可利用多核 CPU 加快编译速度。</span></span><br><span class="line"><span class="comment"># 要求不同的CPU数量进行编译：4、8、16、等，8核CPU大概会在30分钟内编译完成</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：OS-7-aarch64-Minimal的安装，编译会出错：</strong><br>我的实验除了huaweicloud官网做了测试，也在华为泰山服务器做了实验，发现以下问题：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">rand/randsd.o rand/randsdui.o rand/randbui.o rand/randmui.o</span><br><span class="line">libtool: link: ranlib .libs/libgmp.a</span><br><span class="line">libtool: link: rm -fr .libs/libgmp.lax</span><br><span class="line">libtool: link: ( <span class="built_in">cd</span> <span class="string">".libs"</span> &amp;&amp; rm -f <span class="string">"libgmp.la"</span> &amp;&amp; ln -s <span class="string">"../libgmp.la"</span> <span class="string">"libgmp.la"</span> )</span><br><span class="line">make[5]: Leaving directory `/opt/gcc/gcc-7.3.0/gcc-build-7.3.0/gmp<span class="string">'</span></span><br><span class="line"><span class="string">make[4]: Leaving directory `/opt/gcc/gcc-7.3.0/gcc-build-7.3.0/gmp'</span></span><br><span class="line">make[3]: Leaving directory `/opt/gcc/gcc-7.3.0/gcc-build-7.3.0/gmp<span class="string">'</span></span><br><span class="line"><span class="string">make[2]: Leaving directory `/opt/gcc/gcc-7.3.0/gcc-build-7.3.0'</span></span><br><span class="line">make[1]: *** [stage1-bubble] Error 2</span><br><span class="line">make[1]: Leaving directory `/opt/gcc/gcc-7.3.0/gcc-build-7.3.0<span class="string">'</span></span><br><span class="line"><span class="string">make: *** [all] Error 2</span></span><br><span class="line"><span class="string">[root@localhost gcc-build-7.3.0]# </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 再执行，还是出错：</span></span><br><span class="line"><span class="string">config.status: linking ../../gmp/mpn/generic/add_n_sub_n.c to mpn/add_n_sub_n.c</span></span><br><span class="line"><span class="string">config.status: linking ../../gmp/mpn/generic/gmp-mparam.h to gmp-mparam.h</span></span><br><span class="line"><span class="string">config.status: executing libtool commands</span></span><br><span class="line"><span class="string">configure: summary of build options:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Version:           GNU MP 6.1.0</span></span><br><span class="line"><span class="string">  Host type:         none-unknown-linux-gnu</span></span><br><span class="line"><span class="string">  ABI:               standard</span></span><br><span class="line"><span class="string">  Install prefix:    /usr</span></span><br><span class="line"><span class="string">  Compiler:          gcc -std=gnu99</span></span><br><span class="line"><span class="string">  Static libraries:  yes</span></span><br><span class="line"><span class="string">  Shared libraries:  no</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">make[2]: Leaving directory `/opt/gcc/gcc-7.3.0/gcc-build-7.3.0'</span></span><br><span class="line">make[1]: *** [stage1-bubble] Error 2</span><br><span class="line">make[1]: Leaving directory `/opt/gcc/gcc-7.3.0/gcc-build-7.3.0<span class="string">'</span></span><br><span class="line"><span class="string">make: *** [all] Error 2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 最后解决方案：</span></span><br><span class="line"><span class="string">Installing gcc-c++ fixes it.</span></span><br><span class="line"><span class="string">ubuntu：apt-get install gcc g++</span></span><br><span class="line"><span class="string">CentOS：yum -y install gcc gcc-c++</span></span><br></pre></td></tr></table></figure>
-
-<p>编译成功后执行安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ecs-kp01 gcc-build-7.3.0]<span class="comment"># make install</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="四、安装完成"><a href="#四、安装完成" class="headerlink" title="四、安装完成"></a>四、安装完成</h2><p>查看安装的版本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 7.3版本查看</span></span><br><span class="line">[root@ecs-kp01 gcc-build-7.3.0]<span class="comment"># gcc -v </span></span><br><span class="line">Using built-in specs.</span><br><span class="line">COLLECT_GCC=gcc</span><br><span class="line">COLLECT_LTO_WRAPPER=/usr/libexec/gcc/aarch64-unknown-linux-gnu/7.3.0/lto-wrapper</span><br><span class="line">Target: aarch64-unknown-linux-gnu</span><br><span class="line">Configured with: ../configure --<span class="built_in">enable</span>-checking=release --<span class="built_in">enable</span>-language=c,c++ --<span class="built_in">disable</span>-multilib --prefix=/usr</span><br><span class="line">Thread model: posix</span><br><span class="line">gcc version 7.3.0 (GCC) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 7.5版本查看</span></span><br><span class="line">[root@ecs-web gcc-build-7.5.0]<span class="comment"># gcc --version</span></span><br><span class="line">gcc (GCC) 7.5.0</span><br><span class="line">Copyright (C) 2017 Free Software Foundation, Inc.</span><br><span class="line">This is free software; see the <span class="built_in">source</span> <span class="keyword">for</span> copying conditions.  There is NO</span><br><span class="line">warranty; not even <span class="keyword">for</span> MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span><br></pre></td></tr></table></figure>
-
-<p>编译安装成功!</p>
-<blockquote>
-<p>附录：git 编译安装：<br><a href="https://blog.csdn.net/networken/article/details/85403969" target="_blank" rel="noopener">https://blog.csdn.net/networken/article/details/85403969</a></p>
-</blockquote>
-<h2 id="五、GCC制作为RPM包"><a href="#五、GCC制作为RPM包" class="headerlink" title="五、GCC制作为RPM包"></a>五、GCC制作为RPM包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">安装制作工具</span><br><span class="line">[root@web ~]<span class="comment"># yum install rpmdevtools rpm-build wget gcc gcc-c++</span></span><br><span class="line">[root@web ~]<span class="comment"># yum wget gcc gcc-c++</span></span><br><span class="line">[root@web ~]<span class="comment"># mkdir rpmbuild</span></span><br><span class="line">[root@web ~]<span class="comment"># cd /root/rpmbuild/</span></span><br><span class="line"></span><br><span class="line">[root@web rpmbuild]<span class="comment"># rpmdev-setuptree</span></span><br><span class="line">[root@web rpmbuild]<span class="comment"># cd SOURCES</span></span><br><span class="line">[root@web SOURCES]<span class="comment"># wget http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-8.4.0/gcc-8.4.0.tar.gz</span></span><br><span class="line">or</span><br><span class="line">[root@web SOURCES]<span class="comment"># wget https://kunpengsoft.obs.cn-north-4.myhuaweicloud.com/gcc-7.3.tar.gz</span></span><br><span class="line">[root@web SOURCES]<span class="comment"># cd /root/rpmbuild/SPECS</span></span><br><span class="line">[root@web SPECS]<span class="comment"># vim gcc.spec</span></span><br><span class="line"></span><br><span class="line">编译：</span><br><span class="line">[root@web SPECS]<span class="comment"># QA_RPATHS=0x0020 rpmbuild -bb gcc.spec</span></span><br><span class="line">QA_RPATHS=0x0020 rpmbuild -bb gcc.spec</span><br><span class="line">or</span><br><span class="line">[root@web SPECS]<span class="comment"># rpmbuild -bb gcc.spec</span></span><br></pre></td></tr></table></figure>
-
-<p>制作RPM包（for gcc）<br><a href="https://blog.csdn.net/weixin_39660205/article/details/89473205" target="_blank" rel="noopener">https://blog.csdn.net/weixin_39660205/article/details/89473205</a><br><a href="https://www.codeleading.com/article/2949852757/" target="_blank" rel="noopener">https://www.codeleading.com/article/2949852757/</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://majunbo.top/20200505/kunpeng01-gcc/" data-id="ckadkr1mc00042v9x8bra6xml" class="article-share-link">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hexo-install" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/20200405/hexo-install/" class="article-date">
-  <time datetime="2020-04-05T11:53:45.000Z" itemprop="datePublished">2020-04-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/20200405/hexo-install/">用Hexo框架搭建静态博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、Hexo简介"><a href="#一、Hexo简介" class="headerlink" title="一、Hexo简介"></a>一、Hexo简介</h2><p>【Hexo 静态博客框架】是一个纯静态的博客网站框架，也就是一款基于 Node.js 的静态博客框架，依赖少、易于安装使用，可以方便的生成静态网页托管在服务器上，并且Hexo 使用 <code>Markdown</code>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>你访问的这个博客就是使用<a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>来搭建的，因为<code>Markdown</code>写博客太太太方便了 ^_^。</p>
-<p>产生写博客想法以来，开始准备域名、备案、主机购买、技术选型，经历了将近一个月。经过自己的实验发现Hexo是最适合我的，除了有<code>Markdown</code>以外，还因为它是生成的静态页面，这样用户访问速度也是最快的。</p>
-<blockquote>
-<p>任何动态语言网站的访问速度都没有HTML快！对不？</p>
-</blockquote>
-<h2 id="二、中文教程"><a href="#二、中文教程" class="headerlink" title="二、中文教程"></a>二、中文教程</h2><p>Hexo编写博客可以放到个人虚拟主机上，也可以放到github。<br>目前这个网站是<a href="https://majunbo.top/">majunbo.top</a>，放到了华为云主机，<br>同步在<a href="https://majunbo.github.io/" target="_blank" rel="noopener">majunbo.github.io</a>，也有一份一模一样的网站。</p>
-<p>这套软件官网：<br><a href="https://hexo.io/zh-cn/index.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/index.html</a></p>
-<p>并且网已经有了比较不错的教程：</p>
-<p>教程1：<br><a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26625249</a></p>
-<p>教程2：<br><a href="https://zhuanlan.zhihu.com/p/136160884" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/136160884</a><br><a href="https://zhuanlan.zhihu.com/p/136160884" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/136160884</a></p>
-<p>后续有时间，我也可能也会放一些简单的操作步骤。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://majunbo.top/20200405/hexo-install/" data-id="ckadkr1m900022v9x1a0t83ip" class="article-share-link">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/20200403/hello-world/" class="article-date">
-  <time datetime="2020-04-03T05:40:45.000Z" itemprop="datePublished">2020-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/20200403/hello-world/">第一篇：Hello World【知识共享时代】</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、过去知识记录方法"><a href="#一、过去知识记录方法" class="headerlink" title="一、过去知识记录方法"></a>一、过去知识记录方法</h2><blockquote>
-<p>好记性不如烂笔头</p>
-</blockquote>
-<p>自从我记录技术学习资料以来，都是保存到了自己的<strong>印象笔记</strong>中，其实<code>evernote</code>中检索也挺方便，<br>但是现在是知识共享时代，我从不吝惜共享自己所学，正所<strong><code>谓闻道有先后、术业有专攻，如是而已</code></strong>。</p>
-<h2 id="二、知识共享时代"><a href="#二、知识共享时代" class="headerlink" title="二、知识共享时代"></a>二、知识共享时代</h2><blockquote>
-<p>共享知识，创造更多知识</p>
-</blockquote>
-<p>任何知识的获取都是非常容易的，现在是互联网时代，我们没有人能阻挡知识共享的发展步伐。<br>我个人觉得在技术层面如果你有知识、有些经验，只要不是商业秘密大可大方的共享出来，让人多的人利用共享的知识，创造更多的知识。<br>当然了，知识也可以收费，如果你觉得自己的知识别人没有，你也可以在互联网上兜售，所以互联网上也有<a href="https://www.zhihu.com/topic/20071240" target="_blank" rel="noopener">知识付费</a>的模式。</p>
-<h2 id="三、共享自己的学习记录"><a href="#三、共享自己的学习记录" class="headerlink" title="三、共享自己的学习记录"></a>三、共享自己的学习记录</h2><blockquote>
-<p>小虾米共享互联网上学来的知识</p>
-</blockquote>
-<p>今年开始准备在互联网上记录自己的学习笔记，给自己看，也希望能帮助到网友。<br>end…</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://majunbo.top/20200403/hello-world/" data-id="ckadkr1m400002v9x931ubton" class="article-share-link">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB/" rel="tag">知识共享</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
       
