@@ -9,12 +9,12 @@
   <meta name="description" content="一、安装依赖123yum install -y bison* ncurses* openssl-devel cmake# or 安装完成后手贡编译新版本的cmakeyum install -y bison* ncurses* openssl-devel bzip2 wget  CMake是一个跨平台的安装&#x2F;编译工具 1234567891011cd &#x2F;usr&#x2F;local&#x2F;srcwget https:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="鲲鹏服务器实验二：MySQL5.X 编译安装">
-<meta property="og:url" content="https://majunbo.top/20200518/kunpeng02-mysql/index.html">
+<meta property="og:url" content="https://majunbo.top/20200506/kunpeng02-mysql5/index.html">
 <meta property="og:site_name" content="匍匐鲲鹏">
 <meta property="og:description" content="一、安装依赖123yum install -y bison* ncurses* openssl-devel cmake# or 安装完成后手贡编译新版本的cmakeyum install -y bison* ncurses* openssl-devel bzip2 wget  CMake是一个跨平台的安装&#x2F;编译工具 1234567891011cd &#x2F;usr&#x2F;local&#x2F;srcwget https:">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-18T13:49:52.000Z">
-<meta property="article:modified_time" content="2020-05-19T07:06:39.501Z">
+<meta property="article:published_time" content="2020-05-06T13:49:52.000Z">
+<meta property="article:modified_time" content="2020-05-19T08:12:28.187Z">
 <meta property="article:author" content="鲲鹏小哪吒">
 <meta property="article:tag" content="kunpeng">
 <meta name="twitter:card" content="summary">
@@ -77,10 +77,10 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-kunpeng02-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-kunpeng02-mysql5" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/20200518/kunpeng02-mysql/" class="article-date">
-  <time datetime="2020-05-18T13:49:52.000Z" itemprop="datePublished">2020-05-18</time>
+    <a href="/20200506/kunpeng02-mysql5/" class="article-date">
+  <time datetime="2020-05-06T13:49:52.000Z" itemprop="datePublished">2020-05-06</time>
 </a>
     
   </div>
@@ -189,21 +189,26 @@
 <p>登录成功</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@ecs-test mysql]# ln -s &#x2F;data&#x2F;data&#x2F;mysql.sock &#x2F;tmp&#x2F;mysql.sock</span><br><span class="line">[root@ecs-test mysql]# mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 2</span><br><span class="line">Server version: 5.7.29</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2020, Oracle and&#x2F;or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and&#x2F;or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
 
-<p>4、修改密码<br>下述命令中的“Huawei@123”需要根据实际修改成要配置的密码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SET PASSWORD &#x3D; PASSWORD(&#39;Huawei@123&#39;);</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.00 sec)</span><br><span class="line">mysql&gt; commit;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>4、修改密码<br>下述命令中的“123456”需要根据实际修改成要配置的密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SET PASSWORD &#x3D; PASSWORD(&#39;123456&#39;);</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.00 sec)</span><br><span class="line">mysql&gt; commit;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
 <p>5、使用新的密码重新登录</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@ecs-test mysql]# mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 3</span><br><span class="line">Server version: 5.7.29 Source distribution</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2020, Oracle and&#x2F;or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and&#x2F;or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
 
 <h2 id="六、MYSQL允许远程连接"><a href="#六、MYSQL允许远程连接" class="headerlink" title="六、MYSQL允许远程连接"></a>六、MYSQL允许远程连接</h2><p>在数据库中修改远程登录主机信息，使新安装的MYSQL可以远程登录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 修改权限 (注意这里用户名和密码替换成自己的)</span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;%&#39; IDENTIFIED BY &#39;Huawei@123&#39; WITH GRANT OPTION;</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.00 sec)</span><br><span class="line">&#x2F;&#x2F;更新缓存</span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">如果你是RPMp安装的数据库，找到&#x2F;etc&#x2F;my.cnf下面这一行，注释掉</span><br><span class="line">Change line</span><br><span class="line">bind-address &#x3D; 127.0.0.1</span><br><span class="line">to</span><br><span class="line">#bind-address &#x3D; 127.0.0.1</span><br><span class="line">重新启动服务：</span><br><span class="line">service mysql restart</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 修改权限 (注意这里用户名和密码替换成自己的)</span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;%&#39; IDENTIFIED BY &#39;123456&#39; WITH GRANT OPTION;</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.00 sec)</span><br><span class="line">&#x2F;&#x2F;更新缓存</span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">如果你是RPMp安装的数据库，找到&#x2F;etc&#x2F;my.cnf下面这一行，注释掉</span><br><span class="line">Change line</span><br><span class="line">bind-address &#x3D; 127.0.0.1</span><br><span class="line">to</span><br><span class="line">#bind-address &#x3D; 127.0.0.1</span><br><span class="line">重新启动服务：</span><br><span class="line">service mysql restart</span><br></pre></td></tr></table></figure>
 
 <p>如果还不可以访问，要关掉数据库服务器的防火墙，或者配置允许3306端口出去。</p>
+<h2 id="七、忘记MYSQL密码"><a href="#七、忘记MYSQL密码" class="headerlink" title="七、忘记MYSQL密码"></a>七、忘记MYSQL密码</h2><p>用以下命令启动MySQL，以不检查权限的方式启动，然后重新设置密码，重新登录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">service mysql stop</span><br><span class="line">service mysql start --skip-grant-tables</span><br><span class="line">mysql</span><br><span class="line"><span class="comment"># update修改密码</span></span><br><span class="line">mysql&gt; UPDATE mysql.user SET authentication_string=PASSWORD(<span class="string">'password'</span>) <span class="built_in">where</span> USER=<span class="string">'root'</span>;</span><br><span class="line">mysql&gt; flush privileges;//刷新权限</span><br><span class="line">mysql&gt; <span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<p>有密码的情况下修改密码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@ecs mysql]# mysql -uroot -p</span><br><span class="line">Enter password:    &#x2F;&#x2F;直接按回车键</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 2</span><br><span class="line">Server version: 5.7.28 Source distribution</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2019, Oracle and&#x2F;or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and&#x2F;or its affiliates. Other names may be trademarks of their respective owners.</span><br><span class="line"></span><br><span class="line">Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; UPDATE mysql.user SET authentication_string&#x3D;PASSWORD(&#39;password&#39;) where USER&#x3D;&#39;root&#39;;</span><br><span class="line">mysql&gt; flush privileges;&#x2F;&#x2F;刷新权限</span><br><span class="line">mysql&gt; exit</span><br><span class="line"></span><br><span class="line"># 登录测试</span><br><span class="line">[root@ecs mysql]# mysql -uroot -p</span><br><span class="line">Enter password: &#x2F;&#x2F;此处输入设置的密码</span><br><span class="line"></span><br><span class="line"># 说明：</span><br><span class="line">UPDATE mysql.user SET authentication_string&#x3D;PASSWORD(&#39;123456&#39;) where USER&#x3D;&#39;root&#39;; </span><br><span class="line"># 在此处更改密码，123456设置为实际要配置的密码</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://majunbo.top/20200518/kunpeng02-mysql/" data-id="ckadkr1md00052v9xc9nb567o" class="article-share-link">分享到</a>
+        <a data-url="https://majunbo.top/20200506/kunpeng02-mysql5/" data-id="ckadmsiyw0000399x4t429ubu" class="article-share-link">分享到</a>
       
 
       
@@ -216,6 +221,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/20200507/kunpeng03-mysql8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          鲲鹏服务器实验三：MySQL8 yum安装
+        
+      </div>
+    </a>
   
   
     <a href="/20200505/kunpeng01-gcc/" id="article-nav-older" class="article-nav-link-wrap">
@@ -238,7 +252,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB/" rel="tag">知识共享</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB/" rel="tag">知识共享</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -247,7 +261,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -259,19 +273,23 @@
       <ul>
         
           <li>
-            <a href="/20200518/kunpeng02-mysql/">鲲鹏服务器实验二：MySQL5.X 编译安装</a>
+            <a href="/20200513/kunpeng09-nginx-install/">鲲鹏服务器实验九：编译nginx</a>
           </li>
         
           <li>
-            <a href="/20200505/kunpeng01-gcc/">鲲鹏服务器实验一：GCC编译安装</a>
+            <a href="/20200512/kunpeng08-nodejscms/">鲲鹏服务器实验八：部署Node.js系统</a>
           </li>
         
           <li>
-            <a href="/20200405/hexo-install/">用Hexo框架搭建静态博客</a>
+            <a href="/20200511/kunpeng07-pythoncms/">鲲鹏服务器实验七：部署Python语言系统</a>
           </li>
         
           <li>
-            <a href="/20200403/hello-world/">第一篇：Hello World【知识共享时代】</a>
+            <a href="/20200510/kunpeng06-javacms/">鲲鹏服务器实验六：部署Java语言CMS</a>
+          </li>
+        
+          <li>
+            <a href="/20200509/kunpeng05-phpcms/">鲲鹏服务器实验五：部署PHP语言CMS</a>
           </li>
         
       </ul>

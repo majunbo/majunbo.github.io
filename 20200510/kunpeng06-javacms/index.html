@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>鲲鹏服务器实验六：部署Java语言CMS | 匍匐鲲鹏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="单独建立一台鲲鹏服务器，需要带有GCC\MYSQL环境。 一、检查当前系统是否有Java123456789101112[root@web ~]# java -versionopenjdk version &quot;1.8.0_222-ea&quot;OpenJDK Runtime Environment (build 1.8.0_222-ea-b03)OpenJDK 64-Bit Server VM (build">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鲲鹏服务器实验六：部署Java语言CMS">
+<meta property="og:url" content="https://majunbo.top/20200510/kunpeng06-javacms/index.html">
+<meta property="og:site_name" content="匍匐鲲鹏">
+<meta property="og:description" content="单独建立一台鲲鹏服务器，需要带有GCC\MYSQL环境。 一、检查当前系统是否有Java123456789101112[root@web ~]# java -versionopenjdk version &quot;1.8.0_222-ea&quot;OpenJDK Runtime Environment (build 1.8.0_222-ea-b03)OpenJDK 64-Bit Server VM (build">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-10T13:50:10.000Z">
+<meta property="article:modified_time" content="2020-05-19T09:01:39.954Z">
+<meta property="article:author" content="鲲鹏小哪吒">
+<meta property="article:tag" content="kunpeng">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="匍匐鲲鹏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">匍匐鲲鹏</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">纸上得来终觉浅，绝知此事要躬行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="majunbo.top">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-kunpeng06-javacms" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/20200510/kunpeng06-javacms/" class="article-date">
+  <time datetime="2020-05-10T13:50:10.000Z" itemprop="datePublished">2020-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      鲲鹏服务器实验六：部署Java语言CMS
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>单独建立一台鲲鹏服务器，需要带有GCC\MYSQL环境。</p>
+<h2 id="一、检查当前系统是否有Java"><a href="#一、检查当前系统是否有Java" class="headerlink" title="一、检查当前系统是否有Java"></a>一、检查当前系统是否有Java</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@web ~]<span class="comment"># java -version</span></span><br><span class="line">openjdk version <span class="string">"1.8.0_222-ea"</span></span><br><span class="line">OpenJDK Runtime Environment (build 1.8.0_222-ea-b03)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 25.222-b03, mixed mode)</span><br><span class="line"></span><br><span class="line">如果没有就执行安装命令：</span><br><span class="line">[root@web ~]<span class="comment"># yum install java</span></span><br><span class="line">...</span><br><span class="line">[root@web ~]<span class="comment"># java -version</span></span><br><span class="line">openjdk version <span class="string">"1.8.0_242"</span></span><br><span class="line">OpenJDK Runtime Environment (build 1.8.0_242-b08)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 25.242-b08, mixed mode)</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、安装Tomcat中间件产品"><a href="#二、安装Tomcat中间件产品" class="headerlink" title="二、安装Tomcat中间件产品"></a>二、安装Tomcat中间件产品</h2><p>1、下载Tomcat Web服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@web opt]# cd &#x2F;opt</span><br><span class="line">[root@web opt]# wget http:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;tomcat&#x2F;tomcat-9&#x2F;v9.0.31&#x2F;bin&#x2F;apache-tomcat-9.0.31.tar.gz</span><br><span class="line">--2020-03-09 17:42:03--  http:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;tomcat&#x2F;tomcat-9&#x2F;v9.0.31&#x2F;bin&#x2F;apache-tomcat-9.0.31.tar.gz</span><br><span class="line">Resolving mirrors.tuna.tsinghua.edu.cn (mirrors.tuna.tsinghua.edu.cn)... 101.6.8.193, 2402:f000:1:408:8100::1</span><br><span class="line">Connecting to mirrors.tuna.tsinghua.edu.cn (mirrors.tuna.tsinghua.edu.cn)|101.6.8.193|:80... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 11042076 (11M) [application&#x2F;x-gzip]</span><br><span class="line">Saving to: ‘apache-tomcat-9.0.31.tar.gz’</span><br><span class="line"></span><br><span class="line">100%[&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt;] 11,042,076  4.38MB&#x2F;s   in 2.4s</span><br><span class="line"></span><br><span class="line">2020-03-09 17:42:06 (4.38 MB&#x2F;s) - ‘apache-tomcat-9.0.31.tar.gz’ saved [11042076&#x2F;11042076]</span><br><span class="line"></span><br><span class="line">解压Tomcat</span><br><span class="line">[root@web opt]# tar -zxvf apache-tomcat-9.0.31.tar.gz </span><br><span class="line">[root@web opt]# cd apache-tomcat-9.0.31&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、安装内容管理系统jeecms"><a href="#三、安装内容管理系统jeecms" class="headerlink" title="三、安装内容管理系统jeecms"></a>三、安装内容管理系统jeecms</h2><p>1、下载CMS内容管理系统<br>下载：jeecms<br><a href="http://www.jeecms.com/download.htm" target="_blank" rel="noopener">http://www.jeecms.com/download.htm</a></p>
+<p>软件下载到本地：<br>1）软件下载地址：<a href="http://dw.jeecms.com/jeecms/202002/JEECMSx1.2.0_mysql_ROOT.zip" target="_blank" rel="noopener">http://dw.jeecms.com/jeecms/202002/JEECMSx1.2.0_mysql_ROOT.zip</a><br>2）文档下载地址：<a href="http://download.jeecms.com/jeecms/202002/JEECMSx1.2.0_doc.zip" target="_blank" rel="noopener">http://download.jeecms.com/jeecms/202002/JEECMSx1.2.0_doc.zip</a></p>
+<p>解压缩JEECMSx1.2.0_mysql_ROOT.zip文件，把“部署程序”中“ROOT”文件夹压缩为ROOT.zip，上传到以下目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@web webapps]<span class="comment"># pwd</span></span><br><span class="line">/opt/apache-tomcat-9.0.31/webapps</span><br><span class="line">xftp传递程序到tomcat中，并解压：</span><br><span class="line">[root@web webapps]<span class="comment"># ll</span></span><br><span class="line">total 229344</span><br><span class="line">drwxr-x--- 16 root root      4096 Mar 11 11:15 docs</span><br><span class="line">drwxr-x---  6 root root        83 Mar 11 11:15 examples</span><br><span class="line">drwxr-x---  5 root root        87 Mar 11 11:15 host-manager</span><br><span class="line">drwxr-x---  5 root root       103 Mar 11 11:15 manager</span><br><span class="line">-rw-r--r--  1 root root 234844140 Mar 11 14:57 ROOT.zip</span><br><span class="line">[root@web webapps]<span class="comment"># </span></span><br><span class="line">...</span><br><span class="line">解压程序：</span><br><span class="line">[root@web webapps]<span class="comment"># unzip ROOT.zip </span></span><br><span class="line">修改权限：</span><br><span class="line">[root@web webapps]<span class="comment"># chmod -R 755 ROOT</span></span><br></pre></td></tr></table></figure>
+
+<p>3、创建数据库并导入数据库</p>
+<p>解压缩JEECMSx1.2.0_mysql_ROOT.zip文件，把“部署程序”中“DB”jeecmsx1.2.sql，上传到/opt目录：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">创建数据库</span><br><span class="line">[root@web DB]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands <span class="keyword">end</span> <span class="keyword">with</span> ; or \g.</span><br><span class="line">Your MySQL connection id is 3</span><br><span class="line">Server version: 5.7.29 Source distribution</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type '<span class="keyword">help</span>;' or '\h' for help. <span class="keyword">Type</span> <span class="string">'\c'</span> <span class="keyword">to</span> <span class="keyword">clear</span> the <span class="keyword">current</span> <span class="keyword">input</span> statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">create</span> <span class="keyword">database</span> jeecms;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; exit;</span><br><span class="line"></span><br><span class="line">导入原库：</span><br><span class="line">[root@web opt]<span class="comment"># mysql -u root -p jeecms &lt; jeecmsx1.2.sql</span></span><br><span class="line">Enter password: </span><br><span class="line"></span><br><span class="line">修改数据库配置文件：</span><br><span class="line">[root@web opt]<span class="comment"># vim /etc/my.cnf</span></span><br><span class="line">增加以下信息到</span><br><span class="line">[mysqld]</span><br><span class="line">lower_case_table_names = 1</span><br><span class="line">wait_timeout=31536000</span><br><span class="line">interactive_timeout=31536000</span><br></pre></td></tr></table></figure>
+
+<p>4、修改配置文件：</p>
+<p>修改系统数据库连接，jdbc信息  ROOT/WEB-INF/classes/application-beta.properties</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@web classes]<span class="comment"># pwd</span></span><br><span class="line">/opt/apache-tomcat-9.0.31/webapps/ROOT/WEB-INF/classes</span><br><span class="line">[root@web classes]<span class="comment"># vim application-beta.properties </span></span><br><span class="line">change this:</span><br><span class="line">spring.datasource.url=jdbc:mysql://localhost:3308/jeecms1127?useUnicode=<span class="literal">true</span>&amp;characterEncoding=UTF-8&amp;useSSL=<span class="literal">false</span></span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=password</span><br><span class="line">to this:</span><br><span class="line">spring.datasource.url=jdbc:mysql://127.0.0.1:3306/jeecms?useUnicode=<span class="literal">true</span>&amp;characterEncoding=UTF-8&amp;useSSL=<span class="literal">false</span></span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=123456</span><br></pre></td></tr></table></figure>
+
+<p>5、启动应用系统：</p>
+<p>启动Tomcat：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@web apache-tomcat-9.0.31]<span class="comment"># cd /opt/apache-tomcat-9.0.31/</span></span><br><span class="line">[root@web apache-tomcat-9.0.31]<span class="comment"># ./bin/startup.sh </span></span><br><span class="line">Using CATALINA_BASE:   /opt/apache-tomcat-9.0.31</span><br><span class="line">Using CATALINA_HOME:   /opt/apache-tomcat-9.0.31</span><br><span class="line">Using CATALINA_TMPDIR: /opt/apache-tomcat-9.0.31/temp</span><br><span class="line">Using JRE_HOME:        /usr</span><br><span class="line">Using CLASSPATH:       /opt/apache-tomcat-9.0.31/bin/bootstrap.jar:/opt/apache-tomcat-9.0.31/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br></pre></td></tr></table></figure>
+
+<p>浏览器的地址栏中输入：<br><a href="http://192.169.19.135:8080/" target="_blank" rel="noopener">http://192.169.19.135:8080/</a><br>若系统正常显示网站首页则表示本系统顺利安装完成。</p>
+<p>系统管理后台登录：<br><a href="http://192.169.19.135:8080/jeecms/index.html" target="_blank" rel="noopener">http://192.169.19.135:8080/jeecms/index.html</a><br>    用户名：system<br>    密  码：123456</p>
+<p>如不能访问，要打开华为云安全组里的“入方向规则”增加8080端口，和停止ECS防火墙：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@web apache-tomcat-9.0.31]# systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
+<p>如果出现以下错误信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">2020-03-11 16:10:06.748 [main] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - JSR-330 <span class="string">'javax.inject.Inject'</span> annotation found and supported <span class="keyword">for</span> autowiring</span><br><span class="line">2020-03-11 16:10:07.015 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed <span class="keyword">in</span> 2202 ms</span><br><span class="line">Exception <span class="keyword">in</span> thread <span class="string">"Quartz Scheduler [schedulerFactoryBean]"</span> org.springframework.scheduling.SchedulingException: Could not start Quartz Scheduler after delay; nested exception is org.quartz.SchedulerConfigExc</span><br><span class="line">eption: Failure occured during job recovery. [See nested exception: org.quartz.impl.jdbcjobstore.LockException: Failure obtaining db row lock: Table <span class="string">'jeecms.QRTZ_LOCKS'</span> doesn<span class="string">'t exist [See nested exception: com</span></span><br><span class="line"><span class="string">.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table '</span>jeecms.QRTZ_LOCKS<span class="string">' doesn'</span>t exist]]</span><br><span class="line">        at org.springframework.scheduling.quartz.SchedulerFactoryBean<span class="variable">$1</span>.run(SchedulerFactoryBean.java:733)</span><br><span class="line">Caused by: org.quartz.SchedulerConfigException: Failure occured during job recovery. [See nested exception: org.quartz.impl.jdbcjobstore.LockException: Failure obtaining db row lock: Table <span class="string">'jeecms.QRTZ_LOCKS'</span></span><br><span class="line">doesn<span class="string">'t exist [See nested exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table '</span>jeecms.QRTZ_LOCKS<span class="string">' doesn'</span>t exist]]</span><br><span class="line">        at org.quartz.impl.jdbcjobstore.JobStoreSupport.schedulerStarted(JobStoreSupport.java:697)</span><br><span class="line">        at org.quartz.core.QuartzScheduler.start(QuartzScheduler.java:539)</span><br><span class="line">        at org.quartz.impl.StdScheduler.start(StdScheduler.java:142)</span><br><span class="line">        at org.springframework.scheduling.quartz.SchedulerFactoryBean<span class="variable">$1</span>.run(SchedulerFactoryBean.java:730)</span><br><span class="line">Caused by: org.quartz.impl.jdbcjobstore.LockException: Failure obtaining db row lock: Table <span class="string">'jeecms.QRTZ_LOCKS'</span> doesn<span class="string">'t exist [See nested exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: T</span></span><br><span class="line"><span class="string">able '</span>jeecms.QRTZ_LOCKS<span class="string">' doesn'</span>t exist]</span><br></pre></td></tr></table></figure>
+<p>检测数据库配置文件大小写敏感信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">检查Linux下MySQL5.7.27大小写信息：</span><br><span class="line"></span><br><span class="line">mysql&gt; show variables like &#39;lower_case_table_names&#39;;</span><br><span class="line">+------------------------+-------+</span><br><span class="line">| Variable_name          | Value |</span><br><span class="line">+------------------------+-------+</span><br><span class="line">| lower_case_table_names | 0     |</span><br><span class="line">+------------------------+-------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line">mysql&gt; </span><br><span class="line"></span><br><span class="line">lower_case_table_names：0表示敏感，1表示不敏感。</span><br><span class="line"></span><br><span class="line">修改敏感信息：</span><br><span class="line">[root@web opt]# vim &#x2F;etc&#x2F;my.cnf</span><br><span class="line">增加以下信息到[mysqld]下：</span><br><span class="line">lower_case_table_names &#x3D; 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、安装halo博客程序："><a href="#四、安装halo博客程序：" class="headerlink" title="四、安装halo博客程序："></a>四、安装halo博客程序：</h2><p>1、下载halo<br>官网：<a href="https://halo.run/" target="_blank" rel="noopener">https://halo.run/</a></p>
+<p>安装步骤：<a href="https://halo.run/archives/install-with-linux" target="_blank" rel="noopener">https://halo.run/archives/install-with-linux</a></p>
+<p>注意：<br>使用 MySQL 之前，必须要先新建一个 halodb 数据库，MySQL 版本需 5.7 以上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">create database halodb character set utf8mb4 collate utf8mb4_bin;</span><br><span class="line"></span><br><span class="line"># 示例：</span><br><span class="line">mysql&gt; create database halodb character set utf8mb4 collate utf8mb4_bin;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show create database halodb;</span><br><span class="line">+----------+----------------------------------------------------------------------------------------+</span><br><span class="line">| Database | Create Database                                                                        |</span><br><span class="line">+----------+----------------------------------------------------------------------------------------+</span><br><span class="line">| halodb   | CREATE DATABASE &#96;halodb&#96; &#x2F;*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin *&#x2F; |</span><br><span class="line">+----------+----------------------------------------------------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>下载软件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.halo.run/release/halo-1.2.0.jar</span><br><span class="line">或者：</span><br><span class="line"><span class="comment"># 备用地址（建议海外服务器使用）</span></span><br><span class="line">wget https://github.com/halo-dev/halo/releases/download/v1.2.0/halo-1.2.0.jar -O halo-latest.jar</span><br></pre></td></tr></table></figure>
+
+<p>启动测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar halo-latest.jar</span><br></pre></td></tr></table></figure>
+<p><a href="http://192.169.19.135:8090/admin/index.html#/install" target="_blank" rel="noopener">http://192.169.19.135:8090/admin/index.html#/install</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://majunbo.top/20200510/kunpeng06-javacms/" data-id="ckadocago00008h9xbctb18ri" class="article-share-link">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/20200511/kunpeng07-pythoncms/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          鲲鹏服务器实验七：部署Python语言系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/20200509/kunpeng05-phpcms/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">鲲鹏服务器实验五：部署PHP语言CMS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB/" rel="tag">知识共享</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/20200513/kunpeng09-nginx-install/">鲲鹏服务器实验九：编译nginx</a>
+          </li>
+        
+          <li>
+            <a href="/20200512/kunpeng08-nodejscms/">鲲鹏服务器实验八：部署Node.js系统</a>
+          </li>
+        
+          <li>
+            <a href="/20200511/kunpeng07-pythoncms/">鲲鹏服务器实验七：部署Python语言系统</a>
+          </li>
+        
+          <li>
+            <a href="/20200510/kunpeng06-javacms/">鲲鹏服务器实验六：部署Java语言CMS</a>
+          </li>
+        
+          <li>
+            <a href="/20200509/kunpeng05-phpcms/">鲲鹏服务器实验五：部署PHP语言CMS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://arvinxiang.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+          <li>
+            <a href="http://yuancheng.work" target="_blank">远程.work</a>
+          </li>
+        
+          <li>
+            <a href="https://ljf.com/about/" target="_blank">卢敬锋，Medis作者荐</a>
+          </li>
+        
+          <li>
+            <a href="https://www.v2ex.com/member/luin" target="_blank">石墨文档技术总监</a>
+          </li>
+        
+          <li>
+            <a href="https://1024.com/" target="_blank">1024只猴子</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 鲲鹏小哪吒   
+      <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
+       rel="nofollow noopener">豫ICP备20009777</a>
+      <br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>

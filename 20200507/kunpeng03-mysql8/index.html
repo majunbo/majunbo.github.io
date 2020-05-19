@@ -4,18 +4,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2020 | 匍匐鲲鹏</title>
+  <title>鲲鹏服务器实验三：MySQL8 yum安装 | 匍匐鲲鹏</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学习基于华为云鲲鹏云服务的网站系统">
-<meta property="og:type" content="website">
-<meta property="og:title" content="匍匐鲲鹏">
-<meta property="og:url" content="https://majunbo.top/archives/2020/index.html">
+  <meta name="description" content="准备好鲲鹏服务器，连上互联网： 一、安装MySQL8Step 1: 下载仓库： 1wget https:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mysql80-community-release-el7-3.noarch.rpm  Step 2: 添加yum仓库 1rpm –ivh mysql80-community-release-el7-3.noarch.rpm  或者手动编辑mysql.re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鲲鹏服务器实验三：MySQL8 yum安装">
+<meta property="og:url" content="https://majunbo.top/20200507/kunpeng03-mysql8/index.html">
 <meta property="og:site_name" content="匍匐鲲鹏">
-<meta property="og:description" content="学习基于华为云鲲鹏云服务的网站系统">
+<meta property="og:description" content="准备好鲲鹏服务器，连上互联网： 一、安装MySQL8Step 1: 下载仓库： 1wget https:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mysql80-community-release-el7-3.noarch.rpm  Step 2: 添加yum仓库 1rpm –ivh mysql80-community-release-el7-3.noarch.rpm  或者手动编辑mysql.re">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-07T14:04:12.000Z">
+<meta property="article:modified_time" content="2020-05-19T08:28:35.359Z">
 <meta property="article:author" content="鲲鹏小哪吒">
-<meta property="article:tag" content="majunbo，华为云，鲲鹏云服务，majunbo.top，majunbo.github.io">
-<meta property="article:tag" content="linux，technology">
+<meta property="article:tag" content="kunpeng">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="匍匐鲲鹏" type="application/atom+xml">
@@ -76,215 +77,93 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/20200513/kunpeng09-nginx-install/" class="archive-article-date">
-  <time datetime="2020-05-13T15:10:20.000Z" itemprop="datePublished">5月 13</time>
+      <section id="main"><article id="post-kunpeng03-mysql8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/20200507/kunpeng03-mysql8/" class="article-date">
+  <time datetime="2020-05-07T14:04:12.000Z" itemprop="datePublished">2020-05-07</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/20200513/kunpeng09-nginx-install/">鲲鹏服务器实验九：编译nginx</a>
+    <h1 class="article-title" itemprop="name">
+      鲲鹏服务器实验三：MySQL8 yum安装
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/20200512/kunpeng08-nodejscms/" class="archive-article-date">
-  <time datetime="2020-05-12T15:30:16.000Z" itemprop="datePublished">5月 12</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/20200512/kunpeng08-nodejscms/">鲲鹏服务器实验八：部署Node.js系统</a>
-    </h1>
-  
+        <p>准备好鲲鹏服务器，连上互联网：</p>
+<h2 id="一、安装MySQL8"><a href="#一、安装MySQL8" class="headerlink" title="一、安装MySQL8"></a>一、安装MySQL8</h2><p>Step 1: 下载仓库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/20200511/kunpeng07-pythoncms/" class="archive-article-date">
-  <time datetime="2020-05-11T14:30:16.000Z" itemprop="datePublished">5月 11</time>
-</a>
+<p>Step 2: 添加yum仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm –ivh mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>或者手动编辑mysql.repo文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</span><br><span class="line">vim mysql.repo</span><br><span class="line"></span><br><span class="line"><span class="comment">#放入下面内容：</span></span><br><span class="line">[mysql]</span><br><span class="line">name=mysql</span><br><span class="line">baseurl=http://repo.mysql.com/yum/mysql-8.0-community/el/7/aarch64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure>
+
+<p>Step 3: 安装MySQL</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mysql-server</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、使用MySQL8"><a href="#二、使用MySQL8" class="headerlink" title="二、使用MySQL8"></a>二、使用MySQL8</h2><p>1、启动、停止数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld</span><br><span class="line">systemctl stop mysqld</span><br></pre></td></tr></table></figure>
+
+<p>2、查看状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
+
+<p>3、开启、禁止数据库自动启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">disable</span> mysqld</span><br><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br></pre></td></tr></table></figure>
+
+<p>4、查找安装时root的临时密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">'temporary password'</span> /var/<span class="built_in">log</span>/mysqld.log</span><br><span class="line"></span><br><span class="line">[root@localhost yum.repos.d]<span class="comment"># grep 'temporary password' /var/log/mysqld.log</span></span><br><span class="line">2020-03-06T15:19:08.425969Z 5 [Note] [MY-010454] [Server] A temporary password is generated <span class="keyword">for</span> root@localhost: ;-2Vph79h;m/</span><br><span class="line">[root@localhost yum.repos.d]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>5、登录数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql –u root –p</span><br><span class="line">必须修改密码：</span><br><span class="line">ALTER USER USER() IDENTIFIED BY &#39;123456&#39;;</span><br><span class="line">退出重新登录即可。</span><br></pre></td></tr></table></figure>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/20200511/kunpeng07-pythoncms/">鲲鹏服务器实验七：部署Python语言系统</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/20200510/kunpeng06-javacms/" class="archive-article-date">
-  <time datetime="2020-05-10T13:50:10.000Z" itemprop="datePublished">5月 10</time>
-</a>
+    </div>
+    <footer class="article-footer">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/20200510/kunpeng06-javacms/">鲲鹏服务器实验六：部署Java语言CMS</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/20200509/kunpeng05-phpcms/" class="archive-article-date">
-  <time datetime="2020-05-09T12:20:50.000Z" itemprop="datePublished">5月 9</time>
-</a>
+        <a data-url="https://majunbo.top/20200507/kunpeng03-mysql8/" data-id="ckadmu42l00003y9x67oh1aon" class="article-share-link">分享到</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/20200509/kunpeng05-phpcms/">鲲鹏服务器实验五：部署PHP语言CMS</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/20200508/kunpeng04-php/" class="archive-article-date">
-  <time datetime="2020-05-08T15:13:20.000Z" itemprop="datePublished">5月 8</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/20200508/kunpeng04-php/">鲲鹏服务器实验四：PHP7编译安装</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/20200507/kunpeng03-mysql8/" class="archive-article-date">
-  <time datetime="2020-05-07T14:04:12.000Z" itemprop="datePublished">5月 7</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/20200507/kunpeng03-mysql8/">鲲鹏服务器实验三：MySQL8 yum安装</a>
-    </h1>
-  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/20200508/kunpeng04-php/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          鲲鹏服务器实验四：PHP7编译安装
+        
+      </div>
+    </a>
+  
+  
+    <a href="/20200506/kunpeng02-mysql5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">鲲鹏服务器实验二：MySQL5.X 编译安装</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/20200506/kunpeng02-mysql5/" class="archive-article-date">
-  <time datetime="2020-05-06T13:49:52.000Z" itemprop="datePublished">5月 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/20200506/kunpeng02-mysql5/">鲲鹏服务器实验二：MySQL5.X 编译安装</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/20200505/kunpeng01-gcc/" class="archive-article-date">
-  <time datetime="2020-05-05T12:55:49.000Z" itemprop="datePublished">5月 5</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/20200505/kunpeng01-gcc/">鲲鹏服务器实验一：GCC编译安装</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/20200405/hexo-install/" class="archive-article-date">
-  <time datetime="2020-04-05T11:53:45.000Z" itemprop="datePublished">4月 5</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/20200405/hexo-install/">用Hexo框架搭建静态博客</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2020/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/page/2/">下一页 &amp;raquo;</a>
-  </nav>
 </section>
       
       <aside id="sidebar">

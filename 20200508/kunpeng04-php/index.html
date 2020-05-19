@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>鲲鹏服务器实验四：PHP7编译安装 | 匍匐鲲鹏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="PHP官方网站: https:&#x2F;&#x2F;www.php.net&#x2F; 截至2020年2月，最新稳定版本为7.4.3，我们编译上一个稳定版本：PHP 7.3.15 一、准备华为鲲鹏服务器，安装http服务器使用已经有新版GCC的鲲鹏服务器(实验一中的环境)，版本为7.3以上，官网为：https:&#x2F;&#x2F;gcc.gnu.org&#x2F; CentOS7系统安装Apache\nginx WEB服务器 1yum install">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鲲鹏服务器实验四：PHP7编译安装">
+<meta property="og:url" content="https://majunbo.top/20200508/kunpeng04-php/index.html">
+<meta property="og:site_name" content="匍匐鲲鹏">
+<meta property="og:description" content="PHP官方网站: https:&#x2F;&#x2F;www.php.net&#x2F; 截至2020年2月，最新稳定版本为7.4.3，我们编译上一个稳定版本：PHP 7.3.15 一、准备华为鲲鹏服务器，安装http服务器使用已经有新版GCC的鲲鹏服务器(实验一中的环境)，版本为7.3以上，官网为：https:&#x2F;&#x2F;gcc.gnu.org&#x2F; CentOS7系统安装Apache\nginx WEB服务器 1yum install">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-08T15:13:20.000Z">
+<meta property="article:modified_time" content="2020-05-19T08:23:01.183Z">
+<meta property="article:author" content="鲲鹏小哪吒">
+<meta property="article:tag" content="kunpeng">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="匍匐鲲鹏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">匍匐鲲鹏</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">纸上得来终觉浅，绝知此事要躬行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="majunbo.top">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-kunpeng04-php" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/20200508/kunpeng04-php/" class="article-date">
+  <time datetime="2020-05-08T15:13:20.000Z" itemprop="datePublished">2020-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      鲲鹏服务器实验四：PHP7编译安装
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PHP官方网站: <a href="https://www.php.net/" target="_blank" rel="noopener">https://www.php.net/</a></p>
+<p>截至2020年2月，最新稳定版本为7.4.3，我们编译上一个稳定版本：PHP 7.3.15</p>
+<h2 id="一、准备华为鲲鹏服务器，安装http服务器"><a href="#一、准备华为鲲鹏服务器，安装http服务器" class="headerlink" title="一、准备华为鲲鹏服务器，安装http服务器"></a>一、准备华为鲲鹏服务器，安装http服务器</h2><p>使用已经有新版GCC的鲲鹏服务器(实验一中的环境)，版本为7.3以上，官网为：<a href="https://gcc.gnu.org/" target="_blank" rel="noopener">https://gcc.gnu.org/</a></p>
+<p>CentOS7系统安装Apache\nginx WEB服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y httpd</span><br></pre></td></tr></table></figure>
+<p>启动并测试服务器是否可以访问：<a href="http://192.169.19.135/" target="_blank" rel="noopener">http://192.169.19.135/</a></p>
+<p>如果不可以访问，可关闭防火墙，或者添加80端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[root@web var]<span class="comment"># firewall-cmd --state</span></span><br><span class="line">running</span><br><span class="line">[root@web var]<span class="comment"># systemctl status firewalld.service </span></span><br><span class="line">● firewalld.service - firewalld - dynamic firewall daemon</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since Mon 2020-03-09 10:54:23 CST; 6min ago</span><br><span class="line">     Docs: man:firewalld(1)</span><br><span class="line"> Main PID: 1190 (firewalld)</span><br><span class="line">   CGroup: /system.slice/firewalld.service</span><br><span class="line">           └─1190 /usr/bin/python2 -Es /usr/sbin/firewalld --nofork --nopid</span><br><span class="line"></span><br><span class="line">Mar 09 10:54:22 localhost.localdomain systemd[1]: Starting firewalld - dynamic firewall daemon...</span><br><span class="line">Mar 09 10:54:23 localhost.localdomain systemd[1]: Started firewalld - dynamic firewall daemon.</span><br><span class="line"></span><br><span class="line">[root@web var]<span class="comment"># systemctl stop firewalld.service</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 禁止自动启动：</span></span><br><span class="line">[root@web var]<span class="comment"># systemctl disable firewalld.service </span></span><br><span class="line">Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.</span><br><span class="line">Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者增加防火墙端口</span></span><br><span class="line">[root@web var]<span class="comment">#  firewall-cmd --zone=public --add-port=80/tcp --permanent</span></span><br><span class="line">success</span><br><span class="line"><span class="comment"># 重启防火墙：</span></span><br><span class="line">[root@web var]<span class="comment"># firewall-cmd --reload</span></span><br><span class="line">success</span><br><span class="line">[root@web var]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、检查当前系统PHP版本"><a href="#二、检查当前系统PHP版本" class="headerlink" title="二、检查当前系统PHP版本"></a>二、检查当前系统PHP版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[root@ecs-web ~]<span class="comment"># php --version</span></span><br><span class="line">-bash: php: <span class="built_in">command</span> not found</span><br><span class="line"></span><br><span class="line">系统自带PHP为5.4，</span><br><span class="line">[root@web ~]<span class="comment"># yum list|grep php</span></span><br><span class="line">emacs-php-mode.noarch                       1.18.2-1.el7               base     </span><br><span class="line">graphviz-php.aarch64                        2.30.1-21.el7              base     </span><br><span class="line">php.aarch64                                 5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-bcmath.aarch64                          5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-cli.aarch64                             5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-common.aarch64                          5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-dba.aarch64                             5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-devel.aarch64                           5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-embedded.aarch64                        5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-enchant.aarch64                         5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-fpm.aarch64                             5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-gd.aarch64                              5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-intl.aarch64                            5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-ldap.aarch64                            5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-mbstring.aarch64                        5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-mysql.aarch64                           5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-mysqlnd.aarch64                         5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-odbc.aarch64                            5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-pdo.aarch64                             5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-pear.noarch                             1:1.9.4-21.el7             base     </span><br><span class="line">php-pecl-memcache.aarch64                   3.0.8-4.el7                base     </span><br><span class="line">php-pgsql.aarch64                           5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-process.aarch64                         5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-pspell.aarch64                          5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-recode.aarch64                          5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-snmp.aarch64                            5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-soap.aarch64                            5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-xml.aarch64                             5.4.16-46.1.el7_7          updates  </span><br><span class="line">php-xmlrpc.aarch64                          5.4.16-46.1.el7_7          updates  </span><br><span class="line">rrdtool-php.aarch64                         1.4.8-9.el7                base     </span><br><span class="line">uuid-php.aarch64                            1.6.2-26.el7               base     </span><br><span class="line">[root@web ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、配置安装环境"><a href="#三、配置安装环境" class="headerlink" title="三、配置安装环境"></a>三、配置安装环境</h2><p>1、安装依赖包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install libxml2-devel openssl openssl-devel curl curl-devel libjpeg libjpeg-devel freetype freetype-devel libpng libpng-devel libxslt libxslt-devel pcre pcre-devel bzip2 bzip2-devel</span><br><span class="line"></span><br><span class="line">yum install httpd-devel.aarch64</span><br></pre></td></tr></table></figure>
+
+<p>准备libzip，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@web ~]<span class="comment"># cd /opt</span></span><br><span class="line">[root@web ~]<span class="comment"># wget https://libzip.org/download/libzip-1.5.1.tar.gz</span></span><br><span class="line">tar -zxvf libzip-1.5.1.tar.gz</span><br><span class="line"><span class="built_in">cd</span> libzip-1.5.1</span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake ..</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">make -j8 &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">配置变量：</span><br><span class="line"><span class="comment"># 添加搜索路径到配置文件</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'/usr/local/lib64</span></span><br><span class="line"><span class="string">/usr/local/lib</span></span><br><span class="line"><span class="string">/usr/lib</span></span><br><span class="line"><span class="string">/usr/lib64'</span>&gt;&gt;/etc/ld.so.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新配置</span></span><br><span class="line">ldconfig -v</span><br></pre></td></tr></table></figure>
+<div style="page-break-after:always;"></div>
+2、下载PHP7至/opt 目录下并解压
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src/</span><br><span class="line">wget https://www.php.net/distributions/php-7.3.15.tar.gz</span><br><span class="line">tar -zxvf php-7.3.15.tar.gz</span><br><span class="line"><span class="built_in">cd</span> php-7.3.15</span><br><span class="line"></span><br><span class="line">./configure \</span><br><span class="line">    --prefix=/usr/<span class="built_in">local</span>/php \</span><br><span class="line">    --<span class="built_in">exec</span>-prefix=/usr/<span class="built_in">local</span>/php \</span><br><span class="line">    --bindir=/usr/<span class="built_in">local</span>/php/bin \</span><br><span class="line">    --sbindir=/usr/<span class="built_in">local</span>/php/sbin \</span><br><span class="line">    --includedir=/usr/<span class="built_in">local</span>/php/include \</span><br><span class="line">    --libdir=/usr/<span class="built_in">local</span>/php/lib/php \</span><br><span class="line">    --mandir=/usr/<span class="built_in">local</span>/php/php/man \</span><br><span class="line">    --with-config-file-path=/usr/<span class="built_in">local</span>/php/etc \</span><br><span class="line">    --with-mysql-sock=/var/lib/mysql/mysql.sock \</span><br><span class="line">    --with-mhash \</span><br><span class="line">    --with-openssl \</span><br><span class="line">    --with-mysqli=shared,mysqlnd \</span><br><span class="line">    --with-pdo-mysql=shared,mysqlnd \</span><br><span class="line">    --with-gd \</span><br><span class="line">    --with-jpeg-dir \</span><br><span class="line">    --with-png-dir \</span><br><span class="line">    --with-iconv \</span><br><span class="line">    --with-zlib \</span><br><span class="line">    --<span class="built_in">enable</span>-zip \</span><br><span class="line">    --<span class="built_in">enable</span>-inline-optimization \</span><br><span class="line">    --<span class="built_in">disable</span>-debug \</span><br><span class="line">    --<span class="built_in">disable</span>-rpath \</span><br><span class="line">    --<span class="built_in">enable</span>-shared \</span><br><span class="line">    --<span class="built_in">enable</span>-xml \</span><br><span class="line">    --<span class="built_in">enable</span>-bcmath \</span><br><span class="line">    --<span class="built_in">enable</span>-shmop \</span><br><span class="line">    --<span class="built_in">enable</span>-sysvsem \</span><br><span class="line">    --<span class="built_in">enable</span>-mbregex \</span><br><span class="line">    --<span class="built_in">enable</span>-mbstring \</span><br><span class="line">    --<span class="built_in">enable</span>-ftp \</span><br><span class="line">    --<span class="built_in">enable</span>-pcntl \</span><br><span class="line">    --<span class="built_in">enable</span>-sockets \</span><br><span class="line">    --with-xmlrpc \</span><br><span class="line">    --<span class="built_in">enable</span>-soap \</span><br><span class="line">    --without-pear \</span><br><span class="line">    --with-gettext \</span><br><span class="line">    --<span class="built_in">enable</span>-session \</span><br><span class="line">    --with-curl \</span><br><span class="line">    --with-freetype-dir \</span><br><span class="line">    --<span class="built_in">enable</span>-opcache \</span><br><span class="line">    --<span class="built_in">enable</span>-fpm \</span><br><span class="line">    --with-fpm-user=www \</span><br><span class="line">    --with-fpm-group=www \</span><br><span class="line">    --without-gdbm \</span><br><span class="line">    --<span class="built_in">enable</span>-fileinfo \</span><br><span class="line">    --with-apxs2=/usr/bin/apxs</span><br><span class="line">    </span><br><span class="line">    --<span class="built_in">disable</span>-fileinfo</span><br></pre></td></tr></table></figure>
+
+<p>执行的结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">checking whether stripping libraries is possible... yes</span><br><span class="line">checking <span class="keyword">if</span> libtool supports shared libraries... yes</span><br><span class="line">checking whether to build shared libraries... yes</span><br><span class="line">checking whether to build static libraries... no</span><br><span class="line"></span><br><span class="line">creating libtool</span><br><span class="line">appending configuration tag <span class="string">"CXX"</span> to libtool</span><br><span class="line"></span><br><span class="line">Generating files</span><br><span class="line">configure: creating ./config.status</span><br><span class="line">creating main/internal_functions.c</span><br><span class="line">creating main/internal_functions_cli.c</span><br><span class="line">+--------------------------------------------------------------------+</span><br><span class="line">|                        *** WARNING ***                             |</span><br><span class="line">|                                                                    |</span><br><span class="line">| You have built PHP <span class="keyword">for</span> Apache<span class="string">'s current non-threaded MPM.          |</span></span><br><span class="line"><span class="string">| If you change Apache to use a threaded MPM you must reconfigure    |</span></span><br><span class="line"><span class="string">| PHP with --enable-maintainer-zts                                   |</span></span><br><span class="line"><span class="string">+--------------------------------------------------------------------+</span></span><br><span class="line"><span class="string">| License:                                                           |</span></span><br><span class="line"><span class="string">| This software is subject to the PHP License, available in this     |</span></span><br><span class="line"><span class="string">| distribution in the file LICENSE.  By continuing this installation |</span></span><br><span class="line"><span class="string">| process, you are bound by the terms of this license agreement.     |</span></span><br><span class="line"><span class="string">| If you do not agree with the terms of this license, you must abort |</span></span><br><span class="line"><span class="string">| the installation process at this point.                            |</span></span><br><span class="line"><span class="string">+--------------------------------------------------------------------+</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Thank you for using PHP.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">config.status: creating php7.spec</span></span><br><span class="line"><span class="string">config.status: creating main/build-defs.h</span></span><br><span class="line"><span class="string">config.status: creating scripts/phpize</span></span><br><span class="line"><span class="string">config.status: creating scripts/man1/phpize.1</span></span><br><span class="line"><span class="string">config.status: creating scripts/php-config</span></span><br><span class="line"><span class="string">config.status: creating scripts/man1/php-config.1</span></span><br><span class="line"><span class="string">config.status: creating sapi/cli/php.1</span></span><br><span class="line"><span class="string">config.status: creating sapi/fpm/php-fpm.conf</span></span><br><span class="line"><span class="string">config.status: creating sapi/fpm/www.conf</span></span><br><span class="line"><span class="string">config.status: creating sapi/fpm/init.d.php-fpm</span></span><br><span class="line"><span class="string">config.status: creating sapi/fpm/php-fpm.service</span></span><br><span class="line"><span class="string">config.status: creating sapi/fpm/php-fpm.8</span></span><br><span class="line"><span class="string">config.status: creating sapi/fpm/status.html</span></span><br><span class="line"><span class="string">config.status: creating sapi/phpdbg/phpdbg.1</span></span><br><span class="line"><span class="string">config.status: creating sapi/cgi/php-cgi.1</span></span><br><span class="line"><span class="string">config.status: creating ext/phar/phar.1</span></span><br><span class="line"><span class="string">config.status: creating ext/phar/phar.phar.1</span></span><br><span class="line"><span class="string">config.status: creating main/php_config.h</span></span><br><span class="line"><span class="string">config.status: executing default commands</span></span><br><span class="line"><span class="string">[root@ecs-web php-7.3.15]#</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="四、编译安装"><a href="#四、编译安装" class="headerlink" title="四、编译安装"></a>四、编译安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">检测CPU数量：</span><br><span class="line">cat /proc/cpuinfo| grep <span class="string">"processor"</span>| wc -l</span><br><span class="line"></span><br><span class="line">make -j[后跟CPU数量] &amp;&amp; make install</span><br><span class="line">make -j8 &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>编译结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">invertedregexiterator.inc</span><br><span class="line">phar.inc</span><br><span class="line"></span><br><span class="line">Build complete.</span><br><span class="line">Don<span class="string">'t forget to run '</span>make <span class="built_in">test</span><span class="string">'.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Installing PHP SAPI module:       apache2handler</span></span><br><span class="line"><span class="string">/usr/lib64/httpd/build/instdso.sh SH_LIBTOOL='</span>/usr/lib64/apr-1/build/libtool<span class="string">' libphp7.la /usr/lib64/httpd/modules</span></span><br><span class="line"><span class="string">/usr/lib64/apr-1/build/libtool --mode=install install libphp7.la /usr/lib64/httpd/modules/</span></span><br><span class="line"><span class="string">libtool: install: install .libs/libphp7.so /usr/lib64/httpd/modules/libphp7.so</span></span><br><span class="line"><span class="string">libtool: install: install .libs/libphp7.lai /usr/lib64/httpd/modules/libphp7.la</span></span><br><span class="line"><span class="string">libtool: install: warning: remember to run `libtool --finish /usr/local/src/php-7.3.15/libs'</span></span><br><span class="line">chmod 755 /usr/lib64/httpd/modules/libphp7.so</span><br><span class="line">[activating module `php7<span class="string">' in /etc/httpd/conf/httpd.conf]</span></span><br><span class="line"><span class="string">Installing shared extensions:     /usr/local/php/lib/php/extensions/no-debug-non-zts-20180731/</span></span><br><span class="line"><span class="string">Installing PHP CLI binary:        /usr/local/php/bin/</span></span><br><span class="line"><span class="string">Installing PHP CLI man page:      /usr/local/php/php/man/man1/</span></span><br><span class="line"><span class="string">Installing PHP FPM binary:        /usr/local/php/sbin/</span></span><br><span class="line"><span class="string">Installing PHP FPM defconfig:     /usr/local/php/etc/</span></span><br><span class="line"><span class="string">Installing PHP FPM man page:      /usr/local/php/php/man/man8/</span></span><br><span class="line"><span class="string">Installing PHP FPM status page:   /usr/local/php/php/php/fpm/</span></span><br><span class="line"><span class="string">Installing phpdbg binary:         /usr/local/php/bin/</span></span><br><span class="line"><span class="string">Installing phpdbg man page:       /usr/local/php/php/man/man1/</span></span><br><span class="line"><span class="string">Installing PHP CGI binary:        /usr/local/php/bin/</span></span><br><span class="line"><span class="string">Installing PHP CGI man page:      /usr/local/php/php/man/man1/</span></span><br><span class="line"><span class="string">Installing build environment:     /usr/local/php/lib/php/build/</span></span><br><span class="line"><span class="string">Installing header files:          /usr/local/php/include/php/</span></span><br><span class="line"><span class="string">Installing helper programs:       /usr/local/php/bin/</span></span><br><span class="line"><span class="string">  program: phpize</span></span><br><span class="line"><span class="string">  program: php-config</span></span><br><span class="line"><span class="string">Installing man pages:             /usr/local/php/php/man/man1/</span></span><br><span class="line"><span class="string">  page: phpize.1</span></span><br><span class="line"><span class="string">  page: php-config.1</span></span><br><span class="line"><span class="string">/usr/local/src/php-7.3.15/build/shtool install -c ext/phar/phar.phar /usr/local/php/bin</span></span><br><span class="line"><span class="string">ln -s -f phar.phar /usr/local/php/bin/phar</span></span><br><span class="line"><span class="string">Installing PDO headers:           /usr/local/php/include/php/ext/pdo/</span></span><br><span class="line"><span class="string">[root@ecs-web php-7.3.15]#</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="五、安装完成"><a href="#五、安装完成" class="headerlink" title="五、安装完成"></a>五、安装完成</h2><p>1、建立软链接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/<span class="built_in">local</span>/php/sbin/php-fpm /usr/<span class="built_in">local</span>/bin</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/php/bin/php /usr/bin/php</span><br></pre></td></tr></table></figure>
+
+<p>2、执行结果，查看版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@ecs-web php-7.3.15]<span class="comment"># ln -s /usr/local/php/sbin/php-fpm /usr/local/bin</span></span><br><span class="line">[root@ecs-web php-7.3.15]<span class="comment"># ln -s /usr/local/php/bin/php /usr/bin/php</span></span><br><span class="line"><span class="comment"># 查看版本：</span></span><br><span class="line">[root@ecs-web php-7.3.15]<span class="comment"># php -v</span></span><br><span class="line">PHP 7.3.15 (cli) (built: Mar  7 2020 19:47:46) ( NTS )</span><br><span class="line">Copyright (c) 1997-2018 The PHP Group</span><br><span class="line">Zend Engine v3.3.15, Copyright (c) 1998-2018 Zend Technologies</span><br><span class="line">[root@ecs-web php-7.3.15]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="六、配置Apache识别PHP"><a href="#六、配置Apache识别PHP" class="headerlink" title="六、配置Apache识别PHP"></a>六、配置Apache识别PHP</h2><p>1、生成php-fpm配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">拷贝一个php-fpm.conf文件</span><br><span class="line">[root@web html]<span class="comment"># cd /usr/local/php/etc</span></span><br><span class="line">[root@web html]<span class="comment"># cp php-fpm.conf.default php-fpm.conf</span></span><br><span class="line">[root@web etc]<span class="comment"># cd /usr/local/php/etc/php-fpm.d</span></span><br><span class="line">[root@web php-fpm.d]<span class="comment"># cp www.conf.default www.conf</span></span><br></pre></td></tr></table></figure>
+
+<p>2、生成<a href="http://www.conf配置文件" target="_blank" rel="noopener">www.conf配置文件</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@web etc]<span class="comment"># cd /usr/local/php/etc/php-fpm.d</span></span><br><span class="line">[root@web php-fpm.d]<span class="comment"># pwd</span></span><br><span class="line">/usr/<span class="built_in">local</span>/php/etc/php-fpm.d</span><br><span class="line">[root@web php-fpm.d]<span class="comment"># vim www.conf</span></span><br><span class="line">change this :</span><br><span class="line">user = www</span><br><span class="line">group = www</span><br><span class="line">to :</span><br><span class="line">user = apache</span><br><span class="line">group = apache</span><br><span class="line"></span><br><span class="line">启动php-fpm</span><br><span class="line">[root@web php-fpm.d]<span class="comment"># php-fpm </span></span><br><span class="line">[root@web php-fpm.d]<span class="comment"># ps -ef|grep php-fpm</span></span><br><span class="line">root     23196     1  0 11:44 ?        00:00:00 php-fpm: master process (/usr/<span class="built_in">local</span>/php/etc/php-fpm.conf)</span><br><span class="line">apache   23197 23196  0 11:44 ?        00:00:00 php-fpm: pool www</span><br><span class="line">apache   23198 23196  0 11:44 ?        00:00:00 php-fpm: pool www</span><br><span class="line">root     23200  2659  0 11:44 pts/0    00:00:00 grep --color=auto php-fpm</span><br><span class="line">[root@web php-fpm.d]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>3、生成php.ini文件<br>在/usr/local/src/php-7.3.15/目录中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@web php-fpm.d]<span class="comment"># cp /usr/local/src/php-7.3.15/php.ini-production /usr/local/php/etc/php.ini</span></span><br><span class="line">[root@web php-fpm.d]<span class="comment"># vim /usr/local/php/etc/php.ini</span></span><br><span class="line"><span class="comment"># change this (890行):</span></span><br><span class="line">;extension=mysqli</span><br><span class="line"><span class="comment"># to this:</span></span><br><span class="line">extension=mysqli</span><br></pre></td></tr></table></figure>
+
+<p>4、编辑：/etc/httpd/conf/httpd.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@web /]<span class="comment"># vim /etc/httpd/conf/httpd.conf</span></span><br><span class="line"><span class="comment"># 在55行下增加如下信息：</span></span><br><span class="line">LoadModule php7_module /usr/lib64/httpd/modules/libphp7.so</span><br><span class="line">//或者</span><br><span class="line">LoadModule php7_module modules/libphp7.so</span><br><span class="line"></span><br><span class="line">AddType application/x-httpd-php .php</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改下列代码，支持WEB访问（可选）：</span></span><br><span class="line">&lt;Directory <span class="string">"/var/www/html"</span>&gt;</span><br><span class="line">  </span><br><span class="line">    AllowOverride All</span><br><span class="line">    Require all granted</span><br><span class="line">    Options Indexes FollowSymLinks Includes ExecCGI</span><br><span class="line"></span><br><span class="line">&lt;/Directory&gt;</span><br><span class="line"></span><br><span class="line">&lt;IfModule dir_module&gt;</span><br><span class="line">    DirectoryIndex index.php index.html</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+<p>5、编辑一个PHP信息文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@web html]<span class="comment"># cd /var/www/html/</span></span><br><span class="line">[root@web html]<span class="comment"># vim index.php</span></span><br><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>6、重新启动httpd并测试访问</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@web html]<span class="comment"># systemctl restart httpd.service</span></span><br></pre></td></tr></table></figure>
+
+<p>打开浏览器：<br><a href="http://192.169.19.135/" target="_blank" rel="noopener">http://192.169.19.135/</a></p>
+<p>是否显示为：PHP Version 7.3.15</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://majunbo.top/20200508/kunpeng04-php/" data-id="ckadngvs100006e9xhha1br0w" class="article-share-link">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/20200509/kunpeng05-phpcms/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          鲲鹏服务器实验五：部署PHP语言CMS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/20200507/kunpeng03-mysql8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">鲲鹏服务器实验三：MySQL8 yum安装</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB/" rel="tag">知识共享</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/20200513/kunpeng09-nginx-install/">鲲鹏服务器实验九：编译nginx</a>
+          </li>
+        
+          <li>
+            <a href="/20200512/kunpeng08-nodejscms/">鲲鹏服务器实验八：部署Node.js系统</a>
+          </li>
+        
+          <li>
+            <a href="/20200511/kunpeng07-pythoncms/">鲲鹏服务器实验七：部署Python语言系统</a>
+          </li>
+        
+          <li>
+            <a href="/20200510/kunpeng06-javacms/">鲲鹏服务器实验六：部署Java语言CMS</a>
+          </li>
+        
+          <li>
+            <a href="/20200509/kunpeng05-phpcms/">鲲鹏服务器实验五：部署PHP语言CMS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://arvinxiang.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+          <li>
+            <a href="http://yuancheng.work" target="_blank">远程.work</a>
+          </li>
+        
+          <li>
+            <a href="https://ljf.com/about/" target="_blank">卢敬锋，Medis作者荐</a>
+          </li>
+        
+          <li>
+            <a href="https://www.v2ex.com/member/luin" target="_blank">石墨文档技术总监</a>
+          </li>
+        
+          <li>
+            <a href="https://1024.com/" target="_blank">1024只猴子</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 鲲鹏小哪吒   
+      <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
+       rel="nofollow noopener">豫ICP备20009777</a>
+      <br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>

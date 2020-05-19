@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>鲲鹏服务器实验七：部署Python语言系统 | 匍匐鲲鹏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="单独建立一台鲲鹏服务器，需要有GCC 一、检查当前Python软件版本12345678910检查当前版本：[root@web ~]# pythonPython 2.7.5 (default, Aug  7 2019, 00:57:09) [GCC 4.8.5 20150623 (Red Hat 4.8.5-39)] on linux2Type &quot;help&quot;, &quot;copyright&quot;, &quot;credi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鲲鹏服务器实验七：部署Python语言系统">
+<meta property="og:url" content="https://majunbo.top/20200511/kunpeng07-pythoncms/index.html">
+<meta property="og:site_name" content="匍匐鲲鹏">
+<meta property="og:description" content="单独建立一台鲲鹏服务器，需要有GCC 一、检查当前Python软件版本12345678910检查当前版本：[root@web ~]# pythonPython 2.7.5 (default, Aug  7 2019, 00:57:09) [GCC 4.8.5 20150623 (Red Hat 4.8.5-39)] on linux2Type &quot;help&quot;, &quot;copyright&quot;, &quot;credi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-11T14:30:16.000Z">
+<meta property="article:modified_time" content="2020-05-19T08:57:35.556Z">
+<meta property="article:author" content="鲲鹏小哪吒">
+<meta property="article:tag" content="kunpeng">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="匍匐鲲鹏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">匍匐鲲鹏</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">纸上得来终觉浅，绝知此事要躬行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="majunbo.top">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-kunpeng07-pythoncms" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/20200511/kunpeng07-pythoncms/" class="article-date">
+  <time datetime="2020-05-11T14:30:16.000Z" itemprop="datePublished">2020-05-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      鲲鹏服务器实验七：部署Python语言系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>单独建立一台鲲鹏服务器，需要有GCC</p>
+<h2 id="一、检查当前Python软件版本"><a href="#一、检查当前Python软件版本" class="headerlink" title="一、检查当前Python软件版本"></a>一、检查当前Python软件版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">检查当前版本：</span><br><span class="line">[root@web ~]<span class="comment"># python</span></span><br><span class="line">Python 2.7.5 (default, Aug  7 2019, 00:57:09) </span><br><span class="line">[GCC 4.8.5 20150623 (Red Hat 4.8.5-39)] on linux2</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> or <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">exit</span>()</span><br><span class="line">[root@web ~]<span class="comment"># </span></span><br><span class="line"></span><br><span class="line">准备依赖工具：</span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># yum install wget zlib* openssl openssl-devel libffi-devel -y</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、安装新的Python稳定版本"><a href="#二、安装新的Python稳定版本" class="headerlink" title="二、安装新的Python稳定版本"></a>二、安装新的Python稳定版本</h2><p>官网：<a href="https://www.python.org" target="_blank" rel="noopener">https://www.python.org</a></p>
+<p>直接安装：</p>
+<p>[root@web ~]# yum install python3</p>
+<p>下载地址：<br><a href="https://www.python.org/downloads/release/python-382/" target="_blank" rel="noopener">https://www.python.org/downloads/release/python-382/</a><br><a href="https://www.python.org/downloads/release/python-377/" target="_blank" rel="noopener">https://www.python.org/downloads/release/python-377/</a></p>
+<p>1、下载Python3源代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">下载软件包：</span><br><span class="line">[root@web src]<span class="comment"># cd /usr/local/src</span></span><br><span class="line">[root@web opt]<span class="comment"># wget https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tar.xz</span></span><br><span class="line">[root@web src]<span class="comment"># tar -xvf Python-3.7.7.tar.xz </span></span><br><span class="line">[root@web src]<span class="comment"># cd Python-3.7.7/</span></span><br><span class="line"></span><br><span class="line">也可以安装3.8.2版本：</span><br><span class="line">wget https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz</span><br></pre></td></tr></table></figure>
+
+<p>2、编译软件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">查询CPU核数：</span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># cat /proc/cpuinfo| grep "processor"| wc -l</span></span><br><span class="line">24</span><br><span class="line"></span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># ./configure --enable-optimizations --prefix=/opt/Python-3.7.7</span></span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># make -j24 &amp;&amp; make install</span></span><br><span class="line"></span><br><span class="line">执行完结果是：</span><br><span class="line">...</span><br><span class="line">Looking <span class="keyword">in</span> links: /tmp/tmpddegjsbu</span><br><span class="line">Collecting setuptools</span><br><span class="line">Collecting pip</span><br><span class="line">Installing collected packages: setuptools, pip</span><br><span class="line">Successfully installed pip-19.2.3 setuptools-41.2.0</span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># </span></span><br><span class="line"></span><br><span class="line">最后给系统做一下链接文件：</span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># ln -s /opt/Python-3.7.7/ /opt/python</span></span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># ln -s /opt/python/bin/python3.7 /usr/bin/python3</span></span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># ln -s /opt/python/bin/pip3.7 /usr/bin/pip3</span></span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># ln -s /opt/python/bin/pydoc3 /usr/bin/pydoc3</span></span><br><span class="line">执行：</span><br><span class="line">ln -s /opt/Python-3.7.7/ /opt/python</span><br><span class="line">ln -s /opt/python/bin/python3.7 /usr/bin/python3</span><br><span class="line">ln -s /opt/python/bin/pip3.7 /usr/bin/pip3</span><br><span class="line">ln -s /opt/python/bin/pydoc3 /usr/bin/pydoc3</span><br></pre></td></tr></table></figure>
+<p>3、查看版本<br>测试Python3是否安装完成。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查询CPU核数：</span><br><span class="line">python3 --version</span><br><span class="line">pip3 --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、Python框架安装Django"><a href="#三、Python框架安装Django" class="headerlink" title="三、Python框架安装Django"></a>三、Python框架安装Django</h2><p>版本说明：Django1.11-3.0<br>版本选择：Python 2.7 和 Django 1.11 的支持将会在2020年结束。<br>因为新版本的 Python 通常会更快，拥有更多特性，而且有更好的支持，推荐使用 Python 3 的最新版本。</p>
+<p>框架帮助文档：<br><a href="https://docs.djangoproject.com/zh-hans/3.0/" target="_blank" rel="noopener">https://docs.djangoproject.com/zh-hans/3.0/</a></p>
+<p>安装sqlite和django框架：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">升级PIP（可选）</span><br><span class="line">[root@web site-packages]<span class="comment"># pip3 install --upgrade pip</span></span><br><span class="line">安装sqlite3（可选）</span><br><span class="line">[root@web site-packages]<span class="comment"># yum install sqlite*</span></span><br><span class="line">这种方式只有python2支持sqlite，不推荐在Python3环境下安装。</span><br><span class="line"></span><br><span class="line">编译安装sqlite3：</span><br><span class="line">[root@web sqlite3]<span class="comment"># yum install sqlite-devel</span></span><br><span class="line">[root@web /]<span class="comment"># cd /opt</span></span><br><span class="line">[root@web opt]<span class="comment"># wget https://www.sqlite.org/2020/sqlite-autoconf-3310100.tar.gz</span></span><br><span class="line">[root@web sqlite-autoconf-3310100]<span class="comment"># tar -zxvf sqlite-autoconf-3310100.tar.gz</span></span><br><span class="line">[root@web sqlite-autoconf-3310100]<span class="comment"># cd sqlite-autoconf-3310100</span></span><br><span class="line">[root@web sqlite-autoconf-3310100]<span class="comment"># ./configure</span></span><br><span class="line">[root@web sqlite-autoconf-3310100]<span class="comment"># make -j8 &amp;&amp; make install</span></span><br><span class="line">[root@web sqlite-autoconf-3310100]<span class="comment"># echo export LD_LIBRARY_PATH=/usr/local/lib &gt;&gt; /etc/profile</span></span><br><span class="line">[root@web sqlite-autoconf-3310100]<span class="comment"># source /etc/profile</span></span><br><span class="line"></span><br><span class="line">[root@web sqlite-autoconf-3310100]<span class="comment"># sqlite3</span></span><br><span class="line">SQLite version 3.31.1 2020-01-27 19:55:54</span><br><span class="line">Enter <span class="string">".help"</span> <span class="keyword">for</span> usage hints.</span><br><span class="line">Connected to a transient <span class="keyword">in</span>-memory database.</span><br><span class="line">Use <span class="string">".open FILENAME"</span> to reopen on a persistent database.</span><br><span class="line">sqlite&gt; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新编译安装Python 需要新增预编译配置项为`--enable-loadable-sqlite-extensions`</span></span><br><span class="line">[root@web ~]<span class="comment"># make distclean</span></span><br><span class="line">[root@web ~]<span class="comment"># cd /usr/local/src/Python-3.7.7</span></span><br><span class="line">./configure --<span class="built_in">enable</span>-optimizations --prefix=/opt/Python-3.7.7 --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-loadable-sqlite-extensions</span><br><span class="line"></span><br><span class="line">[root@web opt]<span class="comment"># ./configure --enable-optimizations --prefix=/opt/Python-3.7.7 --enable-shared --enable-loadable-sqlite-extensions</span></span><br><span class="line"></span><br><span class="line">[root@web opt]<span class="comment"># make -j8 &amp;&amp; make install</span></span><br><span class="line"></span><br><span class="line">编译完可能会有如下错误：</span><br><span class="line">[root@ecs-2327 Python-3.7.7]<span class="comment"># python3</span></span><br><span class="line">python3: error <span class="keyword">while</span> loading shared libraries: libpython3.7m.so.1.0: cannot open shared object file: No such file or directory</span><br><span class="line">[root@ecs-2327 Python-3.7.7]<span class="comment"># </span></span><br><span class="line">解决：</span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># cp libpython3.7m.so.1.0 /usr/local/lib64/</span></span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># cp libpython3.7m.so.1.0 /usr/lib</span></span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># cp libpython3.7m.so.1.0 /usr/lib64/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Python编译成功后测试一下sqlite3：</span></span><br><span class="line">[root@web opt]<span class="comment"># </span></span><br><span class="line">Python 3.7.7 (default, Mar 12 2020, 12:01:24) </span><br><span class="line">[GCC 7.5.0] on linux</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> or <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt; import sqlite3</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(sqlite3.version_info) <span class="comment">#显示sqlite3版本信息</span></span><br><span class="line">(2, 6, 0)</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(sqlite3.sqlite_version) <span class="comment">#显示SQLite版本信息</span></span><br><span class="line">3.7.17</span><br><span class="line">&gt;&gt;&gt; </span><br><span class="line"></span><br><span class="line">安装django框架：</span><br><span class="line">[root@web ~]<span class="comment"># python3 -m pip install django</span></span><br><span class="line">Collecting django</span><br><span class="line">  Downloading ....</span><br><span class="line">  </span><br><span class="line">如果出现超时：</span><br><span class="line">pip install *** --default-timeout=1000</span><br><span class="line">解决办法: 加大超时时间，如</span><br><span class="line">pip --default-timeout=100 install -U pip</span><br><span class="line">[root@web opt]<span class="comment"># python3 -m pip install django</span></span><br><span class="line">[root@web opt]<span class="comment"># pip3 install Django==3.0.4</span></span><br><span class="line"></span><br><span class="line">手动下载安装django，离线安装django：</span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># tar -zxvf Django-3.0.4.tar.gz </span></span><br><span class="line">[root@web opt]<span class="comment"># cd Django-3.0.4</span></span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># python3 setup.py install</span></span><br><span class="line">出错：</span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># python3 setup.py install</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"setup.py"</span>, line 5, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from setuptools import find_packages, setup</span><br><span class="line">  File <span class="string">"/opt/python/lib/python3.7/site-packages/setuptools/__init__.py"</span>, line 20, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from setuptools.dist import Distribution, Feature</span><br><span class="line">  File <span class="string">"/opt/python/lib/python3.7/site-packages/setuptools/dist.py"</span>, line 35, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from setuptools import windows_support</span><br><span class="line">  File <span class="string">"/opt/python/lib/python3.7/site-packages/setuptools/windows_support.py"</span>, line 2, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    import ctypes</span><br><span class="line">  File <span class="string">"/opt/python/lib/python3.7/ctypes/__init__.py"</span>, line 7, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from _ctypes import Union, Structure, Array</span><br><span class="line">ModuleNotFoundError: No module named <span class="string">'_ctypes'</span></span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># </span></span><br><span class="line"></span><br><span class="line">检查问题：</span><br><span class="line">[root@web opt]<span class="comment"># ldd /usr/bin/python3</span></span><br><span class="line">	linux-vdso.so.1 =&gt;  (0x0000ffff99440000)</span><br><span class="line">	libpython3.7m.so.1.0 =&gt; /lib/libpython3.7m.so.1.0 (0x0000ffff990e0000)</span><br><span class="line">	libcrypt.so.1 =&gt; /usr/lib64/libcrypt.so.1 (0x0000ffff99080000)</span><br><span class="line">	libpthread.so.0 =&gt; /usr/lib64/libpthread.so.0 (0x0000ffff99040000)</span><br><span class="line">	libdl.so.2 =&gt; /usr/lib64/libdl.so.2 (0x0000ffff99010000)</span><br><span class="line">	libutil.so.1 =&gt; /usr/lib64/libutil.so.1 (0x0000ffff98fe0000)</span><br><span class="line">	libm.so.6 =&gt; /usr/lib64/libm.so.6 (0x0000ffff98f20000)</span><br><span class="line">	libc.so.6 =&gt; /usr/lib64/libc.so.6 (0x0000ffff98d90000)</span><br><span class="line">	libfreebl3.so =&gt; /usr/lib64/libfreebl3.so (0x0000ffff98d60000)</span><br><span class="line">	/lib/ld-linux-aarch64.so.1 (0x0000ffff99450000)</span><br><span class="line">[root@web opt]<span class="comment"># </span></span><br><span class="line">重新编译：</span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># cd /usr/local/src/Python-3.7.7</span></span><br><span class="line">./configure --<span class="built_in">enable</span>-optimizations --prefix=/opt/Python-3.7.7 --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-loadable-sqlite-extensions</span><br><span class="line">make altinstall</span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># cp libpython3.7m.so.1.0 /usr/local/lib64/</span></span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># cp libpython3.7m.so.1.0 /usr/lib</span></span><br><span class="line">[root@web Python-3.7.7]<span class="comment"># cp libpython3.7m.so.1.0 /usr/lib64/</span></span><br><span class="line"></span><br><span class="line">解决：</span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># yum install libffi-devel -y</span></span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># yum install libffi-devel </span></span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># yum install sysstat bind-utils -y</span></span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># yum install ntpdate tar lrzsz -y</span></span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># yum install gcc gcc-c++ gcc-g77 gcc*  </span></span><br><span class="line"></span><br><span class="line">yum groupinstall <span class="string">'development tools'</span> -y</span><br><span class="line">yum update -y</span><br><span class="line"></span><br><span class="line">为了安装7.5M的django，要安装400多M的文件：</span><br><span class="line">Transaction Summary</span><br><span class="line">===========================================================================================</span><br><span class="line">Install  57 Packages (+34 Dependent packages)</span><br><span class="line"></span><br><span class="line">Total download size: 400 M</span><br><span class="line">Installed size: 1.8 G</span><br><span class="line">Downloading packages:</span><br><span class="line"></span><br><span class="line">重新安装：</span><br><span class="line">[root@web Django-3.0.4]<span class="comment"># python3 setup.py install</span></span><br></pre></td></tr></table></figure>
+
+<p>安装完成验证版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@web ~]<span class="comment"># python3</span></span><br><span class="line">Python 3.7.7 (default, Mar 11 2020, 21:40:23) </span><br><span class="line">[GCC 7.5.0] on linux</span><br><span class="line">Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> or <span class="string">"license"</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt; import django</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span>(django.get_version())</span><br><span class="line">3.0.4</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line">[root@web mnt]<span class="comment"># python3 -m django --version</span></span><br><span class="line">3.0.4</span><br></pre></td></tr></table></figure>
+
+<p>测试web项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">[root@web mnt]# python3 &#x2F;opt&#x2F;Python-3.7.7&#x2F;bin&#x2F;django-admin.py  startproject mysite</span><br><span class="line"></span><br><span class="line">[root@web mnt]# ls -lR mysite&#x2F;</span><br><span class="line">mysite&#x2F;:</span><br><span class="line">total 8</span><br><span class="line">-rwxr-xr-x 1 root root  626 Mar 12 11:28 manage.py</span><br><span class="line">drwxr-xr-x 2 root root 4096 Mar 12 11:28 mysite</span><br><span class="line">mysite&#x2F;mysite:</span><br><span class="line">total 16</span><br><span class="line">-rw-r--r-- 1 root root  389 Mar 12 11:28 asgi.py</span><br><span class="line">-rw-r--r-- 1 root root    0 Mar 12 11:28 __init__.py</span><br><span class="line">-rw-r--r-- 1 root root 3088 Mar 12 11:28 settings.py</span><br><span class="line">-rw-r--r-- 1 root root  748 Mar 12 11:28 urls.py</span><br><span class="line">-rw-r--r-- 1 root root  389 Mar 12 11:28 wsgi.py</span><br><span class="line">[root@web mnt]# </span><br><span class="line"></span><br><span class="line"># 打开自建的WEB应用：</span><br><span class="line">[root@web mnt]# cd mysite&#x2F;</span><br><span class="line"></span><br><span class="line">[root@web mysite]# python3 manage.py migrate</span><br><span class="line">Operations to perform:</span><br><span class="line">  Apply all migrations: admin, auth, contenttypes, sessions</span><br><span class="line">Running migrations:</span><br><span class="line">  Applying contenttypes.0001_initial... OK</span><br><span class="line">  Applying auth.0001_initial... OK</span><br><span class="line">  Applying admin.0001_initial... OK</span><br><span class="line">  Applying admin.0002_logentry_remove_auto_add... OK</span><br><span class="line">  Applying admin.0003_logentry_add_action_flag_choices... OK</span><br><span class="line">  Applying contenttypes.0002_remove_content_type_name... OK</span><br><span class="line">  Applying auth.0002_alter_permission_name_max_length... OK</span><br><span class="line">  Applying auth.0003_alter_user_email_max_length... OK</span><br><span class="line">  Applying auth.0004_alter_user_username_opts... OK</span><br><span class="line">  Applying auth.0005_alter_user_last_login_null... OK</span><br><span class="line">  Applying auth.0006_require_contenttypes_0002... OK</span><br><span class="line">  Applying auth.0007_alter_validators_add_error_messages... OK</span><br><span class="line">  Applying auth.0008_alter_user_username_max_length... OK</span><br><span class="line">  Applying auth.0009_alter_user_last_name_max_length... OK</span><br><span class="line">  Applying auth.0010_alter_group_name_max_length... OK</span><br><span class="line">  Applying auth.0011_update_proxy_permissions... OK</span><br><span class="line">  Applying sessions.0001_initial... OK</span><br><span class="line"></span><br><span class="line">运行：</span><br><span class="line">[root@web mysite]# python3 manage.py runserver</span><br><span class="line">Watching for file changes with StatReloader</span><br><span class="line">Performing system checks...</span><br><span class="line"></span><br><span class="line">System check identified no issues (0 silenced).</span><br><span class="line"></span><br><span class="line">You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.</span><br><span class="line">Run &#39;python manage.py migrate&#39; to apply them.</span><br><span class="line"></span><br><span class="line">March 12, 2020 - 04:06:52</span><br><span class="line">Django version 3.0.4, using settings &#39;mysite.settings&#39;</span><br><span class="line">Starting development server at http:&#x2F;&#x2F;127.0.0.1:8000&#x2F;</span><br><span class="line">Quit the server with CONTROL-C.</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line">[root@web mysite]# python3 manage.py runserver 80</span><br><span class="line"></span><br><span class="line">[root@web mysite]# python3 manage.py runserver 0:80</span><br><span class="line">&#x3D;</span><br><span class="line">[root@web mysite]# python3 manage.py runserver 0.0.0.0:80</span><br></pre></td></tr></table></figure>
+<p>浏览器访问：<br><a href="http://121.37.176.234:8080/" target="_blank" rel="noopener">http://121.37.176.234:8080/</a></p>
+<p>如果测试出问题：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">DisallowedHost at /</span><br><span class="line">Invalid HTTP_HOST header: '121.37.176.234:8080'. You may need to add '121.37.176.234' to ALLOWED_HOSTS.</span><br><span class="line">Request Method:	GET</span><br><span class="line">Request URL:	http://121.37.176.234:8080/</span><br><span class="line">Django Version:	3.0.4</span><br><span class="line">Exception Type:	DisallowedHost</span><br><span class="line">Exception Value:	</span><br><span class="line">Invalid HTTP_HOST header: '121.37.176.234:8080'. You may need to add '121.37.176.234' to ALLOWED_HOSTS.</span><br><span class="line">Exception Location:	/opt/python/lib/python3.7/site-packages/django/http/request.py in get_host, line 122</span><br><span class="line">Python Executable:	/usr/bin/python3</span><br><span class="line">Python Version:	3.7.7</span><br><span class="line">Python Path:	</span><br><span class="line">['/mnt/mysite',</span><br><span class="line"> '/opt/python/lib/python37.zip',</span><br><span class="line"> '/opt/python/lib/python3.7',</span><br><span class="line"> '/opt/python/lib/python3.7/lib-dynload',</span><br><span class="line"> '/root/.local/lib/python3.7/site-packages',</span><br><span class="line"> '/opt/python/lib/python3.7/site-packages']</span><br><span class="line">Server time:	Thu, 12 Mar 2020 04:18:56 +0000</span><br></pre></td></tr></table></figure>
+<p>修改配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@web mysite]<span class="comment"># vim mysite/settings.py </span></span><br><span class="line">change this :</span><br><span class="line">ALLOWED_HOSTS = []</span><br><span class="line">to this :</span><br><span class="line">ALLOWED_HOSTS = [<span class="string">'121.37.168.253'</span>, <span class="string">'localhost'</span>, <span class="string">'127.0.0.1'</span>]</span><br><span class="line">or</span><br><span class="line">ALLOWED_HOSTS = [<span class="string">'*'</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、部署django-cms系统wagtail"><a href="#四、部署django-cms系统wagtail" class="headerlink" title="四、部署django cms系统wagtail"></a>四、部署django cms系统wagtail</h2><p>下载wagtail </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pip install wagtail</span><br><span class="line">pip3 install wagtail</span><br><span class="line">wagtail start mysite</span><br><span class="line">cd mysite</span><br><span class="line">pip install -r requirements.txt</span><br><span class="line">python manage.py migrate</span><br><span class="line">python manage.py createsuperuser</span><br><span class="line">python manage.py runserver</span><br><span class="line"># 或者：</span><br><span class="line">python manage.py runserver 0:8080</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://majunbo.top/20200511/kunpeng07-pythoncms/" data-id="ckadom17l00009j9x7k492x9h" class="article-share-link">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/20200512/kunpeng08-nodejscms/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          鲲鹏服务器实验八：部署Node.js系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/20200510/kunpeng06-javacms/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">鲲鹏服务器实验六：部署Java语言CMS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB/" rel="tag">知识共享</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/20200513/kunpeng09-nginx-install/">鲲鹏服务器实验九：编译nginx</a>
+          </li>
+        
+          <li>
+            <a href="/20200512/kunpeng08-nodejscms/">鲲鹏服务器实验八：部署Node.js系统</a>
+          </li>
+        
+          <li>
+            <a href="/20200511/kunpeng07-pythoncms/">鲲鹏服务器实验七：部署Python语言系统</a>
+          </li>
+        
+          <li>
+            <a href="/20200510/kunpeng06-javacms/">鲲鹏服务器实验六：部署Java语言CMS</a>
+          </li>
+        
+          <li>
+            <a href="/20200509/kunpeng05-phpcms/">鲲鹏服务器实验五：部署PHP语言CMS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://arvinxiang.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+          <li>
+            <a href="http://yuancheng.work" target="_blank">远程.work</a>
+          </li>
+        
+          <li>
+            <a href="https://ljf.com/about/" target="_blank">卢敬锋，Medis作者荐</a>
+          </li>
+        
+          <li>
+            <a href="https://www.v2ex.com/member/luin" target="_blank">石墨文档技术总监</a>
+          </li>
+        
+          <li>
+            <a href="https://1024.com/" target="_blank">1024只猴子</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 鲲鹏小哪吒   
+      <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
+       rel="nofollow noopener">豫ICP备20009777</a>
+      <br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>

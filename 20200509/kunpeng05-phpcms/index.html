@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>鲲鹏服务器实验五：部署PHP语言CMS | 匍匐鲲鹏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="实验前提：安装一台鲲鹏服务器，需要有GCC\MYSQL\PHP环境，并部署相关软件。本文章介绍了PHP语言的开源cms三巨头Joomla wordpress drupal。 一、部署WordPress CMS博客软件系统要求：官网推荐服务器运行PHP 7.3或更高版本，及MySQL 5.6或MariaDB 10.1或更高版本，并且已经创建了对应该数据库。官网也推荐Apache或Nginx作为运行W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鲲鹏服务器实验五：部署PHP语言CMS">
+<meta property="og:url" content="https://majunbo.top/20200509/kunpeng05-phpcms/index.html">
+<meta property="og:site_name" content="匍匐鲲鹏">
+<meta property="og:description" content="实验前提：安装一台鲲鹏服务器，需要有GCC\MYSQL\PHP环境，并部署相关软件。本文章介绍了PHP语言的开源cms三巨头Joomla wordpress drupal。 一、部署WordPress CMS博客软件系统要求：官网推荐服务器运行PHP 7.3或更高版本，及MySQL 5.6或MariaDB 10.1或更高版本，并且已经创建了对应该数据库。官网也推荐Apache或Nginx作为运行W">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-09T12:20:50.000Z">
+<meta property="article:modified_time" content="2020-05-19T08:43:59.396Z">
+<meta property="article:author" content="鲲鹏小哪吒">
+<meta property="article:tag" content="kunpeng">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="匍匐鲲鹏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">匍匐鲲鹏</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">纸上得来终觉浅，绝知此事要躬行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="majunbo.top">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-kunpeng05-phpcms" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/20200509/kunpeng05-phpcms/" class="article-date">
+  <time datetime="2020-05-09T12:20:50.000Z" itemprop="datePublished">2020-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      鲲鹏服务器实验五：部署PHP语言CMS
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>实验前提：安装一台鲲鹏服务器，需要有GCC\MYSQL\PHP环境，并部署相关软件。<br>本文章介绍了PHP语言的开源cms三巨头Joomla wordpress drupal。</p>
+<h2 id="一、部署WordPress-CMS博客软件"><a href="#一、部署WordPress-CMS博客软件" class="headerlink" title="一、部署WordPress CMS博客软件"></a>一、部署WordPress CMS博客软件</h2><p>系统要求：<br>官网推荐服务器运行PHP 7.3或更高版本，及MySQL 5.6或MariaDB 10.1或更高版本，<br>并且已经创建了对应该数据库。官网也推荐Apache或Nginx作为运行WordPress的最健壮的选项，但这些不是必须的。</p>
+<p>1、下载wordpress软件<br>官方网站：<a href="https://wordpress.org/" target="_blank" rel="noopener">https://wordpress.org/</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">安装数据库支持：</span><br><span class="line">[root@web html]<span class="comment"># yum install php-gd</span></span><br><span class="line"><span class="comment"># gd库是php处理图形的扩展库，gd库提供了一系列用来处理图片的API，使用GD库可以处理图片，或者生成图片。wordpress软件使用到了这个库。</span></span><br><span class="line"></span><br><span class="line">[root@web html]<span class="comment"># cd /var/www/html/</span></span><br><span class="line">[root@web html]<span class="comment"># wget https://cn.wordpress.org/latest-zh_CN.tar.gz</span></span><br><span class="line">解压文件：</span><br><span class="line">[root@web html]<span class="comment"># tar -zxvf wordpress-5.3.2-zh_CN.tar.gz</span></span><br><span class="line">[root@web wordpress]<span class="comment"># mkdir -p /var/www/html/wordpress/wp-content/uploads</span></span><br><span class="line">修改权限：</span><br><span class="line">[root@web html]<span class="comment"># chown -R apache:apache wordpress</span></span><br><span class="line">[root@web html]<span class="comment"># chmod -R 755 wordpress</span></span><br><span class="line">[root@web html]<span class="comment"># cd wordpress</span></span><br><span class="line"></span><br><span class="line">修改PHP参数，使之支持mysqli（如果已经修改可跳过）：</span><br><span class="line">[root@web wordpress]<span class="comment"># vim /usr/local/php/etc/php.ini</span></span><br><span class="line">change this (918行):</span><br><span class="line">;extension=mysqli</span><br><span class="line">to this:</span><br><span class="line">extension=mysqli</span><br></pre></td></tr></table></figure>
+
+<p>2、创建wordpress系统数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@web html]# mysql -hlocalhost -uroot -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 3</span><br><span class="line">Server version: 5.7.29 Source distribution</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2020, Oracle and&#x2F;or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and&#x2F;or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; create database wordpress;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">| wordpress          |</span><br><span class="line">+--------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; exit</span><br><span class="line">Bye</span><br></pre></td></tr></table></figure>
+
+<p>3、测试服务器是否可以访问</p>
+<p>打开已经安装的软件会自动进入自动配置流程：<br><a href="http://121.36.210.29/wordpress/" target="_blank" rel="noopener">http://121.36.210.29/wordpress/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">数据库名：wordpress</span><br><span class="line">用户名：root</span><br><span class="line">密码：xxx</span><br><span class="line">数据库主机：127.0.0.1</span><br><span class="line">表前缀：wp_</span><br></pre></td></tr></table></figure>
+
+<p>PS:系统有可能会出错，提示：</p>
+<blockquote>
+<p>建立数据库连接时出错<br>这意味着您在wp-config.php文件中指定的用户名和密码信息不正确，或我们未能在127.0.0.1联系到数据库服&gt; 务器。这可能意味着您主机的数据库服务器未在运行。</p>
+</blockquote>
+<blockquote>
+<p>您确定用户名和密码正确吗？<br>您确定输入的主机名正确吗？<br>您确定数据库服务器在运行吗？<br>如果您不明白这些意味着什么，您应该联系您的主机提供商。如果您仍需要帮助，请访问WordPress支持论坛。</p>
+</blockquote>
+<p>检查系统安全问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@web wordpress]# getsebool -a | grep mysql</span><br><span class="line">mysql_connect_any --&gt; off</span><br><span class="line">selinuxuser_mysql_connect_enabled --&gt; off</span><br><span class="line">说明启用了SElinux策略，</span><br><span class="line"></span><br><span class="line">下面配置selinux，并关闭</span><br><span class="line">[root@web wordpress]# vim &#x2F;etc&#x2F;selinux&#x2F;config </span><br><span class="line">change this:</span><br><span class="line">SELINUX&#x3D;enforcing</span><br><span class="line">to this:</span><br><span class="line">SELINUX&#x3D;disabled</span><br><span class="line">[root@web wordpress]# setenforce 0</span><br><span class="line"></span><br><span class="line">如果CentOS 7.X使用了防火墙：</span><br><span class="line">用Firewall-cmd将自定义它以允许外部访问端口80（http）和443（https）。</span><br><span class="line">firewall-cmd --permanent --zone&#x3D;public --add-service&#x3D;http </span><br><span class="line">firewall-cmd --permanent --zone&#x3D;public --add-service&#x3D;https</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<p>如果不想浏览器配置，也可手动修改配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@web wordpress]<span class="comment"># pwd</span></span><br><span class="line">/var/www/html/wordpress</span><br><span class="line">[root@web wordpress]<span class="comment"># cp wp-config-sample.php wp-config.php</span></span><br></pre></td></tr></table></figure>
+
+<p>4、配置完成输入相关配置信息<br>打开<br><a href="http://121.36.210.29/wordpress/wp-login.php" target="_blank" rel="noopener">http://121.36.210.29/wordpress/wp-login.php</a><br>测试登录admin/password</p>
+<h2 id="二、部署Joomla-CMS平台软件"><a href="#二、部署Joomla-CMS平台软件" class="headerlink" title="二、部署Joomla CMS平台软件"></a>二、部署Joomla CMS平台软件</h2><p>这套软件下载次数：<br>Downloaded over 111,000,000 times!</p>
+<p>1、下载Joomla软件<br>官方网站：<a href="https://www.joomla.org/" target="_blank" rel="noopener">https://www.joomla.org/</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@web html]<span class="comment"># cd /var/www/html/</span></span><br><span class="line">[root@web html]<span class="comment"># mkdir joomla</span></span><br><span class="line">[root@web html]<span class="comment"># cd joomla/</span></span><br><span class="line">[root@web joomla]<span class="comment"># wget https://downloads.joomla.org/cms/joomla3/3-9-15/Joomla_3-9-15-Stable-Full_Package.zip</span></span><br><span class="line"></span><br><span class="line">解压软件：</span><br><span class="line">[root@web joomla]<span class="comment"># unzip Joomla_3.9.15-Stable-Full_Package.zip </span></span><br><span class="line">修改目录权限</span><br><span class="line">[root@web joomla]<span class="comment"># cd ..</span></span><br><span class="line">[root@web html]<span class="comment"># chown -R apache:apache joomla/</span></span><br></pre></td></tr></table></figure>
+
+<p>2、测试服务器访问</p>
+<p>打开已经安装的软件会自动进入自动配置流程：<br>打开网站：<a href="http://121.36.210.29/joomla/" target="_blank" rel="noopener">http://121.36.210.29/joomla/</a></p>
+<p>3、增加简体中文-部署完成</p>
+<p>Extensions: Install Languages<br>选择：Chinese Simplified</p>
+<h2 id="三、部署Drupal-CMS开源内容管理"><a href="#三、部署Drupal-CMS开源内容管理" class="headerlink" title="三、部署Drupal CMS开源内容管理"></a>三、部署Drupal CMS开源内容管理</h2><p>Drupal是全球三大开源内容管理系统之一。<br><a href="http://down.chinaz.com/try/201205/1892_1.htm" target="_blank" rel="noopener">http://down.chinaz.com/try/201205/1892_1.htm</a></p>
+<p>1、下载Drupal软件<br>官方网站：<a href="https://www.joomla.org/" target="_blank" rel="noopener">https://www.joomla.org/</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@web html]<span class="comment"># cd /var/www/html/</span></span><br><span class="line">[root@web drupal]<span class="comment"># wget https://ftp.drupal.org/files/projects/drupal-8.8.3.zip</span></span><br><span class="line">or</span><br><span class="line">[root@web drupal]<span class="comment"># wget https://ftp.drupal.org/files/projects/drupal-8.8.3.tar.gz</span></span><br><span class="line"></span><br><span class="line">解压软件：</span><br><span class="line">[root@web html]<span class="comment"># tar -zxvf drupal-8.8.3.tar.gz</span></span><br><span class="line">修改目录权限</span><br><span class="line">[root@web html]<span class="comment"># chown -R apache:apache drupal-8.8.3/</span></span><br></pre></td></tr></table></figure>
+
+<p>配置PHP环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@web ~]<span class="comment"># vim /usr/local/php/etc/php.ini</span></span><br><span class="line">将max_execution_time = 30 </span><br><span class="line">改成max_execution_time = 90</span><br><span class="line">[opcache]</span><br><span class="line">engine = On</span><br><span class="line">;zend_extension=php_opcache.dll</span><br><span class="line">zend_extension=/usr/<span class="built_in">local</span>/src/php-7.3.15/modules/opcache.so</span><br><span class="line">opcache.enable=1</span><br><span class="line">opcache.memory_consumption=128</span><br><span class="line">opcache.interned_strings_buffer=8</span><br><span class="line">opcache.max_accelerated_files=4000</span><br><span class="line">opcache.revalidate_freq=60</span><br><span class="line">opcache.fast_shutdown=1</span><br></pre></td></tr></table></figure>
+
+<p>2、创建Drupal数据库</p>
+<p>连接到MYSQL数据库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@web ~]# mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 17</span><br><span class="line">Server version: 5.7.27 Source distribution</span><br><span class="line"></span><br><span class="line">mysql&gt; CREATE DATABASE drupaldb;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; commit;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>3、测试服务器是否可以访问</p>
+<p>打开已经安装的软件会自动进入自动配置流程：<br>打开网站：<a href="http://192.169.19.135/drupal-8.8.3/core/install.php" target="_blank" rel="noopener">http://192.169.19.135/drupal-8.8.3/core/install.php</a></p>
+<p>网站打开后，可能会出现错误提示：<br>Warnings found</p>
+<blockquote>
+<p>PHP OPCODE CACHING<br>Not enabled<br>PHP OPcode caching can improve your site’s performance considerably. It is highly recommended to have OPcache installed on your server.</p>
+</blockquote>
+<p><strong>错误原因是：缺少PHP OPcod</strong><br>opcache是用来提高PHP性能的，Opcache 的前生是 Optimizer+ ，它是PHP的官方公司 Zend 开发的一款闭源但可以免费使用的 PHP 优化加速组件。“鸟哥在博客中说，提高PHP 7性能的几个tips，第一条就是开启opcache”</p>
+<p>在文件的1912行下面增加下列代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@web ~]<span class="comment"># vim /usr/local/php/etc/php.ini</span></span><br><span class="line">将max_execution_time = 30 </span><br><span class="line">改成max_execution_time = 90</span><br><span class="line"></span><br><span class="line">[opcache]</span><br><span class="line">engine = On</span><br><span class="line">;zend_extension=php_opcache.dll</span><br><span class="line">zend_extension=/usr/<span class="built_in">local</span>/src/php-7.3.15/modules/opcache.so</span><br><span class="line">opcache.enable=1</span><br><span class="line">opcache.memory_consumption=128</span><br><span class="line">opcache.interned_strings_buffer=8</span><br><span class="line">opcache.max_accelerated_files=4000</span><br><span class="line">opcache.revalidate_freq=60</span><br><span class="line">opcache.fast_shutdown=1</span><br></pre></td></tr></table></figure>
+
+<p>4、部署完成<br>打开地址<br><a href="http://192.169.19.135/drupal-8.8.3" target="_blank" rel="noopener">http://192.169.19.135/drupal-8.8.3</a><br>访问。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://majunbo.top/20200509/kunpeng05-phpcms/" data-id="ckado7uf30000819x7jya3fpy" class="article-share-link">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/20200510/kunpeng06-javacms/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          鲲鹏服务器实验六：部署Java语言CMS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/20200508/kunpeng04-php/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">鲲鹏服务器实验四：PHP7编译安装</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB/" rel="tag">知识共享</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/20200513/kunpeng09-nginx-install/">鲲鹏服务器实验九：编译nginx</a>
+          </li>
+        
+          <li>
+            <a href="/20200512/kunpeng08-nodejscms/">鲲鹏服务器实验八：部署Node.js系统</a>
+          </li>
+        
+          <li>
+            <a href="/20200511/kunpeng07-pythoncms/">鲲鹏服务器实验七：部署Python语言系统</a>
+          </li>
+        
+          <li>
+            <a href="/20200510/kunpeng06-javacms/">鲲鹏服务器实验六：部署Java语言CMS</a>
+          </li>
+        
+          <li>
+            <a href="/20200509/kunpeng05-phpcms/">鲲鹏服务器实验五：部署PHP语言CMS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://arvinxiang.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+          <li>
+            <a href="http://yuancheng.work" target="_blank">远程.work</a>
+          </li>
+        
+          <li>
+            <a href="https://ljf.com/about/" target="_blank">卢敬锋，Medis作者荐</a>
+          </li>
+        
+          <li>
+            <a href="https://www.v2ex.com/member/luin" target="_blank">石墨文档技术总监</a>
+          </li>
+        
+          <li>
+            <a href="https://1024.com/" target="_blank">1024只猴子</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 鲲鹏小哪吒   
+      <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
+       rel="nofollow noopener">豫ICP备20009777</a>
+      <br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>

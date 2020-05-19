@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>鲲鹏服务器实验九：编译nginx | 匍匐鲲鹏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="安装一台鲲鹏服务器(CentOS\EulerOS)、或者任何X86服务器均可，需要有GCC环境。 一、准备环境1、下载nginx软件源代码： 12[root@web opt]# wget http:&#x2F;&#x2F;nginx.org&#x2F;download&#x2F;nginx-1.16.1.tar.gz[root@web opt]# tar -zxvf nginx-1.16.1.tar.gz 2、准备第三方库： 1yum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鲲鹏服务器实验九：编译nginx">
+<meta property="og:url" content="https://majunbo.top/20200513/kunpeng09-nginx-install/index.html">
+<meta property="og:site_name" content="匍匐鲲鹏">
+<meta property="og:description" content="安装一台鲲鹏服务器(CentOS\EulerOS)、或者任何X86服务器均可，需要有GCC环境。 一、准备环境1、下载nginx软件源代码： 12[root@web opt]# wget http:&#x2F;&#x2F;nginx.org&#x2F;download&#x2F;nginx-1.16.1.tar.gz[root@web opt]# tar -zxvf nginx-1.16.1.tar.gz 2、准备第三方库： 1yum">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-13T15:10:20.000Z">
+<meta property="article:modified_time" content="2020-05-19T09:20:06.052Z">
+<meta property="article:author" content="鲲鹏小哪吒">
+<meta property="article:tag" content="kunpeng">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="匍匐鲲鹏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">匍匐鲲鹏</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">纸上得来终觉浅，绝知此事要躬行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="majunbo.top">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-kunpeng09-nginx-install" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/20200513/kunpeng09-nginx-install/" class="article-date">
+  <time datetime="2020-05-13T15:10:20.000Z" itemprop="datePublished">2020-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      鲲鹏服务器实验九：编译nginx
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>安装一台鲲鹏服务器(CentOS\EulerOS)、或者任何X86服务器均可，需要有GCC环境。</p>
+<h2 id="一、准备环境"><a href="#一、准备环境" class="headerlink" title="一、准备环境"></a>一、准备环境</h2><p>1、下载nginx软件源代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@web opt]<span class="comment"># wget http://nginx.org/download/nginx-1.16.1.tar.gz</span></span><br><span class="line">[root@web opt]<span class="comment"># tar -zxvf nginx-1.16.1.tar.gz</span></span><br></pre></td></tr></table></figure>
+<p>2、准备第三方库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc gcc-c++ make unzip pcre pcre-devel zlib zlib-devel libxml2 libxml2-devel  readline readline-devel ncurses ncurses-devel perl-devel perl-ExtUtils-Embed openssl-devel -y</span><br></pre></td></tr></table></figure>
+<p>3、创建nginx用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupadd nginx</span><br><span class="line">useradd nginx -g nginx -s &#x2F;sbin&#x2F;nologin -M</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、编译代码"><a href="#二、编译代码" class="headerlink" title="二、编译代码"></a>二、编译代码</h2><p>1、<strong>编译</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#推荐参数</span></span><br><span class="line">$ ./configure --user=nginx --group=nginx --prefix=/usr/<span class="built_in">local</span>/nginx --http-log-path=/var/<span class="built_in">log</span>/nginx/access.log --error-log-path=/var/<span class="built_in">log</span>/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/var/run/nginx.pid --with-pcre-jit --with-http_ssl_module --with-http_v2_module --with-http_sub_module --with-stream --with-stream_ssl_module</span><br><span class="line"></span><br><span class="line"><span class="comment">#或者：</span></span><br><span class="line">[root@web nginx-1.16.1]<span class="comment"># ./configure</span></span><br><span class="line">....</span><br><span class="line">Configuration summary</span><br><span class="line">  + using system PCRE library</span><br><span class="line">  + OpenSSL library is not used</span><br><span class="line">  + using system zlib library</span><br><span class="line"></span><br><span class="line">  nginx path prefix: <span class="string">"/usr/local/nginx"</span></span><br><span class="line">  nginx binary file: <span class="string">"/usr/local/nginx/sbin/nginx"</span></span><br><span class="line">  nginx modules path: <span class="string">"/usr/local/nginx/modules"</span></span><br><span class="line">  nginx configuration prefix: <span class="string">"/usr/local/nginx/conf"</span></span><br><span class="line">  nginx configuration file: <span class="string">"/usr/local/nginx/conf/nginx.conf"</span></span><br><span class="line">  nginx pid file: <span class="string">"/usr/local/nginx/logs/nginx.pid"</span></span><br><span class="line">  nginx error <span class="built_in">log</span> file: <span class="string">"/usr/local/nginx/logs/error.log"</span></span><br><span class="line">  nginx http access <span class="built_in">log</span> file: <span class="string">"/usr/local/nginx/logs/access.log"</span></span><br><span class="line">  nginx http client request body temporary files: <span class="string">"client_body_temp"</span></span><br><span class="line">  nginx http proxy temporary files: <span class="string">"proxy_temp"</span></span><br><span class="line">  nginx http fastcgi temporary files: <span class="string">"fastcgi_temp"</span></span><br><span class="line">  nginx http uwsgi temporary files: <span class="string">"uwsgi_temp"</span></span><br><span class="line">  nginx http scgi temporary files: <span class="string">"scgi_temp"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 最后执行安装：</span></span><br><span class="line">[root@web nginx-1.16.1]<span class="comment"># make &amp;&amp; make install</span></span><br><span class="line">or</span><br><span class="line">[root@web nginx-1.16.1]<span class="comment"># make -j24 &amp;&amp; make install</span></span><br></pre></td></tr></table></figure>
+
+<p>ps:<br>EulerOS2.8 configure编译出错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">checking <span class="keyword">for</span> getaddrinfo() ... found</span><br><span class="line">checking <span class="keyword">for</span> PCRE library ... not found</span><br><span class="line">checking <span class="keyword">for</span> PCRE library <span class="keyword">in</span> /usr/<span class="built_in">local</span>/ ... not found</span><br><span class="line">checking <span class="keyword">for</span> PCRE library <span class="keyword">in</span> /usr/include/pcre/ ... not found</span><br><span class="line">checking <span class="keyword">for</span> PCRE library <span class="keyword">in</span> /usr/pkg/ ... not found</span><br><span class="line">checking <span class="keyword">for</span> PCRE library <span class="keyword">in</span> /opt/<span class="built_in">local</span>/ ... not found</span><br><span class="line">./configure: error: the HTTP rewrite module requires the PCRE library.</span><br><span class="line">You can either <span class="built_in">disable</span> the module by using --without-http_rewrite_module</span><br><span class="line">option, or install the PCRE library into the system, or build the PCRE library</span><br><span class="line">statically from the <span class="built_in">source</span> with nginx by using --with-pcre=&lt;path&gt; option.</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这就能证明华为官网的帮助是有bug的：</span></span><br><span class="line">https://www.huaweicloud.com/kunpeng/software/nginx.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解决办法：</span></span><br><span class="line">[root@web yum.repos.d]<span class="comment"># pwd</span></span><br><span class="line">/etc/yum.repos.d</span><br><span class="line">[root@web yum.repos.d]<span class="comment"># vim EulerOS.repo</span></span><br><span class="line">[base]</span><br><span class="line">name=EulerOS-2.0SP8 base</span><br><span class="line">baseurl=http://developer.huawei.com/ict/site-euleros/euleros/repo/yum/2.8/os/aarch64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=http://developer.huawei.com/ict/site-euleros/euleros/repo/yum/2.8/os/RPM-GPG-KEY-EulerOS</span><br><span class="line"></span><br><span class="line">查询已经成功配置的repo源，可以使用以下命令：</span><br><span class="line">yum repolist</span><br><span class="line">如果您要更新所有的包和它们的依赖，在root权限下使用命令如下：</span><br><span class="line">yum update</span><br><span class="line">安装pcre-devel\openssl解决问题</span><br><span class="line">yum -y install pcre-devel</span><br><span class="line">yum -y install openssl openssl-devel</span><br></pre></td></tr></table></figure>
+
+<p>2、修改文件权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改目录权限</span></span><br><span class="line">[root@web nginx-1.16.1]<span class="comment"># chown -R nginx:nginx /usr/local/nginx</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#创建软链接</span></span><br><span class="line">[root@web nginx-1.16.1]<span class="comment"># ln -s /usr/local/nginx/sbin/nginx /usr/bin/nginx</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看版本：</span></span><br><span class="line">[root@web sbin]<span class="comment"># cd /usr/local/nginx/</span></span><br><span class="line">[root@web nginx]<span class="comment"># ./sbin/nginx -V</span></span><br><span class="line">nginx version: nginx/1.16.1</span><br><span class="line">built by gcc 7.3.0 (GCC) </span><br><span class="line">configure arguments:</span><br><span class="line"></span><br><span class="line"><span class="comment">#或者：</span></span><br><span class="line">[root@web ~]<span class="comment"># nginx -v</span></span><br><span class="line">nginx version: nginx/1.16.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、配置开机启动"><a href="#三、配置开机启动" class="headerlink" title="三、配置开机启动"></a>三、配置开机启动</h2><h3 id="3-1编写systemctl启动文件（适合于CentOS-RHEL7-推荐）："><a href="#3-1编写systemctl启动文件（适合于CentOS-RHEL7-推荐）：" class="headerlink" title="3.1编写systemctl启动文件（适合于CentOS\RHEL7 推荐）："></a>3.1编写systemctl启动文件（适合于CentOS\RHEL7 推荐）：</h3><p>可修改nginx.conf配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改PID文件位置，如果上面配置了 --pid-path=/var/run/nginx.pid</span></span><br><span class="line">[root@web opt]<span class="comment"># vim /usr/local/nginx/conf/nginx.conf</span></span><br><span class="line">change this:</span><br><span class="line"><span class="comment">#pid        logs/nginx.pid;</span></span><br><span class="line">to this:</span><br><span class="line">pid        /var/run/nginx.pid;</span><br></pre></td></tr></table></figure>
+
+<p>开机自启动<br>vim /usr/lib/systemd/system/nginx.service<br>增加下面代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=The NGINX HTTP and reverse proxy server</span><br><span class="line">After=network-online.target remote-fs.target nss-lookup.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/var/run/nginx.pid</span><br><span class="line">ExecStartPre=/usr/<span class="built_in">local</span>/nginx/sbin/nginx -t -c /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line">ExecStart=/usr/<span class="built_in">local</span>/nginx/sbin/nginx -c /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line">ExecReload=/bin/<span class="built_in">kill</span> -s HUP <span class="variable">$MAINPID</span></span><br><span class="line">ExecStop=/bin/<span class="built_in">kill</span> -s QUIT <span class="variable">$MAINPID</span></span><br><span class="line">PrivateTmp=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>配置自动启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@web system]<span class="comment"># chkconfig nginx on</span></span><br><span class="line">Note: Forwarding request to <span class="string">'systemctl enable nginx.service'</span>.</span><br><span class="line">or</span><br><span class="line">[root@web ~]<span class="comment"># systemctl enable nginx.service</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动系统：</span></span><br><span class="line">[root@web system]<span class="comment"># systemctl start nginx</span></span><br><span class="line"><span class="comment"># 查看状态：</span></span><br><span class="line">[root@web system]<span class="comment"># systemctl status  nginx</span></span><br><span class="line">● nginx.service - The NGINX HTTP and reverse proxy server</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Wed 2020-04-01 10:39:36 CST; 3min 32s ago</span><br><span class="line"> Main PID: 25498 (nginx)</span><br><span class="line">    Tasks: 2 (<span class="built_in">limit</span>: 5632)</span><br><span class="line">   Memory: 1.5M</span><br><span class="line">   CGroup: /system.slice/nginx.service</span><br><span class="line">           ├─25498 nginx: master process /usr/<span class="built_in">local</span>/nginx/sbin/nginx -c /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line">           └─25499 nginx: worker process</span><br><span class="line"></span><br><span class="line">Apr 01 10:39:36 euler systemd[1]: Starting The NGINX HTTP and reverse proxy server...</span><br><span class="line">Apr 01 10:39:36 euler nginx[25496]: nginx: the configuration file /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf syntax is ok</span><br><span class="line">Apr 01 10:39:36 euler nginx[25496]: nginx: configuration file /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf <span class="built_in">test</span> is successful</span><br><span class="line">Apr 01 10:39:36 euler systemd[1]: nginx.service: Failed to parse PID from file /var/run/nginx.pid: Invalid argument</span><br><span class="line">Apr 01 10:39:36 euler systemd[1]: Started The NGINX HTTP and reverse proxy server.</span><br></pre></td></tr></table></figure>
+<p>上面有错误：euler systemd[1]: nginx.service: Failed to parse PID from file /var/run/nginx.pid: Invalid argument</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个文件夹和override.conf文件</span></span><br><span class="line">[root@web ~]<span class="comment"># cd  /usr/lib/systemd/system</span></span><br><span class="line">[root@web system]<span class="comment"># mkdir nginx.service.d</span></span><br><span class="line">[root@web system]<span class="comment"># printf "[Service]\nExecStartPost=/bin/sleep 0.1\n" &gt; /usr/lib/systemd/system/nginx.service.d/override.conf</span></span><br><span class="line">[root@web system]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2自己编写启动文件（可兼容CentOS-RHEL6）"><a href="#3-2自己编写启动文件（可兼容CentOS-RHEL6）" class="headerlink" title="3.2自己编写启动文件（可兼容CentOS\RHEL6）"></a>3.2自己编写启动文件（可兼容CentOS\RHEL6）</h3><p>可修改nginx.conf配置文件vim /usr/local/nginx/conf/nginx.conf：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改PID文件位置，如果上面配置了 --pid-path=/var/run/nginx.pid</span></span><br><span class="line">[root@web nginx]<span class="comment"># mkdir /usr/local/nginx/logs</span></span><br><span class="line">[root@web opt]<span class="comment"># vim /usr/local/nginx/conf/nginx.conf</span></span><br><span class="line">change this:</span><br><span class="line"><span class="comment">#pid        logs/nginx.pid;</span></span><br><span class="line">to this:</span><br><span class="line">pid        /usr/<span class="built_in">local</span>/nginx/logs/nginx.pid;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>下列/etc/init.d/nginx代码使用systemctl启动时必须配置/usr/local/nginx/logs/文件夹，否则centos7可能会有问题：</p>
+</blockquote>
+<p>vim /etc/init.d/nginx </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># nginx - this script starts and stops the nginx daemon</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># chkconfig:   - 85 15</span></span><br><span class="line"><span class="comment"># description:  NGINX is an HTTP(S) server, HTTP(S) reverse \</span></span><br><span class="line"><span class="comment">#               proxy and IMAP/POP3 proxy server</span></span><br><span class="line"><span class="comment"># processname: nginx</span></span><br><span class="line"><span class="comment"># config:      /usr/local/nginx/conf/nginx.conf</span></span><br><span class="line"><span class="comment"># config:      /etc/sysconfig/nginx</span></span><br><span class="line"><span class="comment"># pidfile:     /usr/local/nginx/logs/nginx.pid</span></span><br><span class="line"><span class="comment"># Source function library.</span></span><br><span class="line">. /etc/rc.d/init.d/<span class="built_in">functions</span></span><br><span class="line"><span class="comment"># Source networking configuration.</span></span><br><span class="line">. /etc/sysconfig/network</span><br><span class="line"><span class="comment"># Check that networking is up.</span></span><br><span class="line">[ <span class="string">"<span class="variable">$NETWORKING</span>"</span> = <span class="string">"no"</span> ] &amp;&amp; <span class="built_in">exit</span> 0</span><br><span class="line">nginx=<span class="string">"/usr/local/nginx/sbin/nginx"</span></span><br><span class="line">prog=$(basename <span class="variable">$nginx</span>)</span><br><span class="line">NGINX_CONF_FILE=<span class="string">"/usr/local/nginx/conf/nginx.conf"</span></span><br><span class="line">[ -f /etc/sysconfig/nginx ] &amp;&amp; . /etc/sysconfig/nginx</span><br><span class="line">lockfile=/var/lock/subsys/nginx</span><br><span class="line"><span class="function"><span class="title">make_dirs</span></span>() &#123;</span><br><span class="line">   <span class="comment"># make required directories</span></span><br><span class="line">   user=`<span class="variable">$nginx</span> -V 2&gt;&amp;1 | grep <span class="string">"configure arguments:"</span> | sed <span class="string">'s/[^*]*--user=\([^ ]*\).*/\1/g'</span> -`</span><br><span class="line">   <span class="keyword">if</span> [ -z <span class="string">"`grep <span class="variable">$user</span> /etc/passwd`"</span> ]; <span class="keyword">then</span></span><br><span class="line">       useradd -M -s /bin/nologin <span class="variable">$user</span></span><br><span class="line">   <span class="keyword">fi</span></span><br><span class="line">   options=`<span class="variable">$nginx</span> -V 2&gt;&amp;1 | grep <span class="string">'configure arguments:'</span>`</span><br><span class="line">   <span class="keyword">for</span> opt <span class="keyword">in</span> <span class="variable">$options</span>; <span class="keyword">do</span></span><br><span class="line">       <span class="keyword">if</span> [ `<span class="built_in">echo</span> <span class="variable">$opt</span> | grep <span class="string">'.*-temp-path'</span>` ]; <span class="keyword">then</span></span><br><span class="line">           value=`<span class="built_in">echo</span> <span class="variable">$opt</span> | cut -d <span class="string">"="</span> -f 2`</span><br><span class="line">           <span class="keyword">if</span> [ ! -d <span class="string">"<span class="variable">$value</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">               <span class="comment"># echo "creating" $value</span></span><br><span class="line">               mkdir -p <span class="variable">$value</span> &amp;&amp; chown -R <span class="variable">$user</span> <span class="variable">$value</span></span><br><span class="line">           <span class="keyword">fi</span></span><br><span class="line">       <span class="keyword">fi</span></span><br><span class="line">   <span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">start</span></span>() &#123;</span><br><span class="line">    [ -x <span class="variable">$nginx</span> ] || <span class="built_in">exit</span> 5</span><br><span class="line">    [ -f <span class="variable">$NGINX_CONF_FILE</span> ] || <span class="built_in">exit</span> 6</span><br><span class="line">    make_dirs</span><br><span class="line">    <span class="built_in">echo</span> -n $<span class="string">"Starting <span class="variable">$prog</span>: "</span></span><br><span class="line">    daemon <span class="variable">$nginx</span> -c <span class="variable">$NGINX_CONF_FILE</span></span><br><span class="line">    retval=$?</span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">    [ <span class="variable">$retval</span> -eq 0 ] &amp;&amp; touch <span class="variable">$lockfile</span></span><br><span class="line">    <span class="built_in">return</span> <span class="variable">$retval</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">stop</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> -n $<span class="string">"Stopping <span class="variable">$prog</span>: "</span></span><br><span class="line">    killproc <span class="variable">$prog</span> -QUIT</span><br><span class="line">    retval=$?</span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">    [ <span class="variable">$retval</span> -eq 0 ] &amp;&amp; rm -f <span class="variable">$lockfile</span></span><br><span class="line">    <span class="built_in">return</span> <span class="variable">$retval</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">restart</span></span>() &#123;</span><br><span class="line">    configtest || <span class="built_in">return</span> $?</span><br><span class="line">    stop</span><br><span class="line">    sleep 1</span><br><span class="line">    start</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">reload</span></span>() &#123;</span><br><span class="line">    configtest || <span class="built_in">return</span> $?</span><br><span class="line">    <span class="built_in">echo</span> -n $<span class="string">"Reloading <span class="variable">$prog</span>: "</span></span><br><span class="line">    killproc <span class="variable">$nginx</span> -HUP</span><br><span class="line">    RETVAL=$?</span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">force_reload</span></span>() &#123;</span><br><span class="line">    restart</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">configtest</span></span>() &#123;</span><br><span class="line">  <span class="variable">$nginx</span> -t -c <span class="variable">$NGINX_CONF_FILE</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">rh_status</span></span>() &#123;</span><br><span class="line">    status <span class="variable">$prog</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">rh_status_q</span></span>() &#123;</span><br><span class="line">    rh_status &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">    start)</span><br><span class="line">        rh_status_q &amp;&amp; <span class="built_in">exit</span> 0</span><br><span class="line">        <span class="variable">$1</span></span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        rh_status_q || <span class="built_in">exit</span> 0</span><br><span class="line">        <span class="variable">$1</span></span><br><span class="line">        ;;</span><br><span class="line">    restart|configtest)</span><br><span class="line">        <span class="variable">$1</span></span><br><span class="line">        ;;</span><br><span class="line">    reload)</span><br><span class="line">        rh_status_q || <span class="built_in">exit</span> 7</span><br><span class="line">        <span class="variable">$1</span></span><br><span class="line">        ;;</span><br><span class="line">    force-reload)</span><br><span class="line">        force_reload</span><br><span class="line">        ;;</span><br><span class="line">    status)</span><br><span class="line">        rh_status</span><br><span class="line">        ;;</span><br><span class="line">    condrestart|try-restart)</span><br><span class="line">        rh_status_q || <span class="built_in">exit</span> 0</span><br><span class="line">            ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="built_in">echo</span> $<span class="string">"Usage: <span class="variable">$0</span> &#123;start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest&#125;"</span></span><br><span class="line">        <span class="built_in">exit</span> 2</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+
+
+<p>配置自动启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@web ~]<span class="comment"># chmod a+x  /etc/init.d/nginx</span></span><br><span class="line">chkconfig --add /etc/init.d/nginx</span><br><span class="line">chkconfig nginx on</span><br></pre></td></tr></table></figure>
+
+<p>删除自动启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@web nginx]<span class="comment"># chkconfig --del /etc/init.d/nginx </span></span><br><span class="line">[root@web nginx]<span class="comment"># chkconfig nginx off</span></span><br></pre></td></tr></table></figure>
+
+<p>如果不创建/usr/local/nginx/logs会有错误提示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@web run]<span class="comment"># systemctl status nginx</span></span><br><span class="line">● nginx.service - SYSV: NGINX is an HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3 proxy server</span><br><span class="line">   Loaded: loaded (/etc/rc.d/init.d/nginx; bad; vendor preset: disabled)</span><br><span class="line">   Active: failed (Result: timeout) since Wed 2020-04-01 10:03:52 CST; 2min 22s ago</span><br><span class="line">     Docs: man:systemd-sysv-generator(8)</span><br><span class="line">  Process: 1555 ExecStart=/etc/rc.d/init.d/nginx start (code=exited, status=0/SUCCESS)</span><br><span class="line"></span><br><span class="line">Apr 01 09:58:51 web systemd[1]: Starting SYSV: NGINX is an HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3 proxy server...</span><br><span class="line">Apr 01 09:58:52 web nginx[1555]: Starting nginx: [  OK  ]</span><br><span class="line">Apr 01 09:58:52 web systemd[1]: Can<span class="string">'t open PID file /usr/local/nginx/logs/nginx.pid (yet?) after start: No such file or directory</span></span><br><span class="line"><span class="string">Apr 01 10:03:52 web systemd[1]: nginx.service start operation timed out. Terminating.</span></span><br><span class="line"><span class="string">Apr 01 10:03:52 web systemd[1]: Failed to start SYSV: NGINX is an HTTP(S) server, HTTP(S) reverse proxy and IMAP/POP3 proxy server.</span></span><br><span class="line"><span class="string">Apr 01 10:03:52 web systemd[1]: Unit nginx.service entered failed state.</span></span><br><span class="line"><span class="string">Apr 01 10:03:52 web systemd[1]: nginx.service failed.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">解决办法，可增加目录：</span></span><br><span class="line"><span class="string">[root@web nginx]# mkdir /usr/local/nginx/logs</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="四、启动测试"><a href="#四、启动测试" class="headerlink" title="四、启动测试"></a>四、启动测试</h2><p>启动nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@web nginx]<span class="comment"># systemctl start nginx</span></span><br><span class="line">or</span><br><span class="line">[root@web sbin]<span class="comment"># cd /usr/local/nginx/</span></span><br><span class="line">[root@web nginx]<span class="comment"># ./sbin/nginx</span></span><br></pre></td></tr></table></figure>
+
+<p>其他功能：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动</span></span><br><span class="line">systemctl start nginx</span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">systemctl status nginx</span><br><span class="line"><span class="comment"># 停止</span></span><br><span class="line">systemctl stop nginx</span><br><span class="line"></span><br><span class="line">或者：</span><br><span class="line">nginx  <span class="comment">#启动nginx</span></span><br><span class="line">nginx -s quit  <span class="comment">#快速停止nginx</span></span><br><span class="line">nginx -V <span class="comment">#查看版本，以及配置文件地址</span></span><br><span class="line">nginx -v <span class="comment">#查看版本</span></span><br><span class="line">nginx -s reload|reopen|stop|quit   <span class="comment">#重新加载配置|重启|快速停止|安全关闭nginx</span></span><br><span class="line">nginx -h <span class="comment">#帮助</span></span><br><span class="line"><span class="comment"># 测试配置是否正确</span></span><br><span class="line">nginx -t</span><br></pre></td></tr></table></figure>
+<p>打开浏览器直接访问（不能访问请关闭防火墙）：<br><a href="http://192.169.19.135/" target="_blank" rel="noopener">http://192.169.19.135/</a></p>
+<h2 id="五、其他性能修改（可选）"><a href="#五、其他性能修改（可选）" class="headerlink" title="五、其他性能修改（可选）"></a>五、其他性能修改（可选）</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@web nginx]# pwd</span><br><span class="line">/usr/local/nginx/conf</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改软件运行权限 配置工作进程数量、打开文件数量限制</span></span><br><span class="line">[root@web nginx]# vim nginx.conf</span><br><span class="line"><span class="attribute">user</span>  nginx nginx;</span><br><span class="line"><span class="attribute">worker_processes</span> auto;</span><br><span class="line"><span class="attribute">worker_rlimit_nofile</span> <span class="number">51200</span>;</span><br><span class="line"><span class="attribute">pid</span>        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line">events</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attribute">use</span> <span class="literal">epoll</span>;</span><br><span class="line">        <span class="attribute">worker_connections</span> <span class="number">51200</span>;</span><br><span class="line">        <span class="attribute">multi_accept</span> <span class="literal">on</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://majunbo.top/20200513/kunpeng09-nginx-install/" data-id="ckadpcfqv0000bj9xfcoo1uiw" class="article-share-link">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/20200512/kunpeng08-nodejscms/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">鲲鹏服务器实验八：部署Node.js系统</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB/" rel="tag">知识共享</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/20200513/kunpeng09-nginx-install/">鲲鹏服务器实验九：编译nginx</a>
+          </li>
+        
+          <li>
+            <a href="/20200512/kunpeng08-nodejscms/">鲲鹏服务器实验八：部署Node.js系统</a>
+          </li>
+        
+          <li>
+            <a href="/20200511/kunpeng07-pythoncms/">鲲鹏服务器实验七：部署Python语言系统</a>
+          </li>
+        
+          <li>
+            <a href="/20200510/kunpeng06-javacms/">鲲鹏服务器实验六：部署Java语言CMS</a>
+          </li>
+        
+          <li>
+            <a href="/20200509/kunpeng05-phpcms/">鲲鹏服务器实验五：部署PHP语言CMS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://arvinxiang.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+          <li>
+            <a href="http://yuancheng.work" target="_blank">远程.work</a>
+          </li>
+        
+          <li>
+            <a href="https://ljf.com/about/" target="_blank">卢敬锋，Medis作者荐</a>
+          </li>
+        
+          <li>
+            <a href="https://www.v2ex.com/member/luin" target="_blank">石墨文档技术总监</a>
+          </li>
+        
+          <li>
+            <a href="https://1024.com/" target="_blank">1024只猴子</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 鲲鹏小哪吒   
+      <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
+       rel="nofollow noopener">豫ICP备20009777</a>
+      <br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>
