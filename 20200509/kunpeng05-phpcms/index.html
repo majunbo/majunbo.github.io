@@ -1,105 +1,63 @@
-
 <!DOCTYPE html>
 <html>
+  <!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   
-  <title>鲲鹏服务器实验五：部署PHP语言CMS | 匍匐鲲鹏</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="实验前提：安装一台鲲鹏服务器，需要有GCC\MYSQL\PHP环境，并部署相关软件。本文章介绍了PHP语言的开源cms三巨头Joomla wordpress drupal。 一、部署WordPress CMS博客软件系统要求：官网推荐服务器运行PHP 7.3或更高版本，及MySQL 5.6或MariaDB 10.1或更高版本，并且已经创建了对应该数据库。官网也推荐Apache或Nginx作为运行W">
-<meta property="og:type" content="article">
-<meta property="og:title" content="鲲鹏服务器实验五：部署PHP语言CMS">
-<meta property="og:url" content="https://majunbo.top/20200509/kunpeng05-phpcms/index.html">
-<meta property="og:site_name" content="匍匐鲲鹏">
-<meta property="og:description" content="实验前提：安装一台鲲鹏服务器，需要有GCC\MYSQL\PHP环境，并部署相关软件。本文章介绍了PHP语言的开源cms三巨头Joomla wordpress drupal。 一、部署WordPress CMS博客软件系统要求：官网推荐服务器运行PHP 7.3或更高版本，及MySQL 5.6或MariaDB 10.1或更高版本，并且已经创建了对应该数据库。官网也推荐Apache或Nginx作为运行W">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-09T12:20:50.000Z">
-<meta property="article:modified_time" content="2020-05-19T08:43:59.396Z">
-<meta property="article:author" content="鲲鹏小哪吒">
-<meta property="article:tag" content="kunpeng">
-<meta name="twitter:card" content="summary">
+  <title>鲲鹏服务器实验五：部署PHP语言CMS - 匍匐鲲鹏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   
-    <link rel="alternative" href="/atom.xml" title="匍匐鲲鹏" type="application/atom+xml">
+  <meta name="keywords" content=kunpeng>
+  
+    <meta name="description" content="学习基于华为云鲲鹏云服务的网站系统">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=1.02">
   
+  
+    <link rel="alternate" href="/atom.xml " title="匍匐鲲鹏" type="application/atom+xml">
+  
+
   
 <link rel="stylesheet" href="/css/style.css">
 
-  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
-  
 <meta name="generator" content="Hexo 4.2.0"></head>
-<body>
-<div id="container">
-  <div id="wrap">
-    <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">匍匐鲲鹏</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">纸上得来终觉浅，绝知此事要躬行</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-          <a class="main-nav-link" href="/about">About</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
-          <input type="submit" value="" class="search-form-submit">
-          <input name=tn type=hidden value="bds">
-          <input name=cl type=hidden value="3">
-          <input name=ct type=hidden value="2097152">
-          <input type="hidden" name="si" value="majunbo.top">
-        </form>
-      </div>
-    </div>
+  <body>
+    <div class="container">
+      <header class="header">
+  <div class="blog-title">
+    <a href="/" class="logo">匍匐鲲鹏</a>
+    <div class="subtitle">纸上得来终觉浅，绝知此事要躬行</div>
   </div>
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">主页</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives" class="menu-item-link">归档</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/about" class="menu-item-link">关于</a>
+        </li>
+      
+    </ul>
+  </nav>
 </header>
-    <div class="outer">
-      <section id="main"><article id="post-kunpeng05-phpcms" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/20200509/kunpeng05-phpcms/" class="article-date">
-  <time datetime="2020-05-09T12:20:50.000Z" itemprop="datePublished">2020-05-09</time>
-</a>
-    
+<article class="post">
+  <div class="post-title">
+    <h1 class="article-title">鲲鹏服务器实验五：部署PHP语言CMS</h1>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      鲲鹏服务器实验五：部署PHP语言CMS
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实验前提：安装一台鲲鹏服务器，需要有GCC\MYSQL\PHP环境，并部署相关软件。<br>本文章介绍了PHP语言的开源cms三巨头Joomla wordpress drupal。</p>
+   <div class="post-meta">
+    <span class="post-time">2020-05-09</span>
+  </div>
+  <div class="post-content">
+    <p>实验前提：安装一台鲲鹏服务器，需要有GCC\MYSQL\PHP环境，并部署相关软件。<br>本文章介绍了PHP语言的开源cms三巨头Joomla wordpress drupal。</p>
 <h2 id="一、部署WordPress-CMS博客软件"><a href="#一、部署WordPress-CMS博客软件" class="headerlink" title="一、部署WordPress CMS博客软件"></a>一、部署WordPress CMS博客软件</h2><p>系统要求：<br>官网推荐服务器运行PHP 7.3或更高版本，及MySQL 5.6或MariaDB 10.1或更高版本，<br>并且已经创建了对应该数据库。官网也推荐Apache或Nginx作为运行WordPress的最健壮的选项，但这些不是必须的。</p>
 <p>1、下载wordpress软件<br>官方网站：<a href="https://wordpress.org/" target="_blank" rel="noopener">https://wordpress.org/</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">安装数据库支持：</span><br><span class="line">[root@web html]<span class="comment"># yum install php-gd</span></span><br><span class="line"><span class="comment"># gd库是php处理图形的扩展库，gd库提供了一系列用来处理图片的API，使用GD库可以处理图片，或者生成图片。wordpress软件使用到了这个库。</span></span><br><span class="line"></span><br><span class="line">[root@web html]<span class="comment"># cd /var/www/html/</span></span><br><span class="line">[root@web html]<span class="comment"># wget https://cn.wordpress.org/latest-zh_CN.tar.gz</span></span><br><span class="line">解压文件：</span><br><span class="line">[root@web html]<span class="comment"># tar -zxvf wordpress-5.3.2-zh_CN.tar.gz</span></span><br><span class="line">[root@web wordpress]<span class="comment"># mkdir -p /var/www/html/wordpress/wp-content/uploads</span></span><br><span class="line">修改权限：</span><br><span class="line">[root@web html]<span class="comment"># chown -R apache:apache wordpress</span></span><br><span class="line">[root@web html]<span class="comment"># chmod -R 755 wordpress</span></span><br><span class="line">[root@web html]<span class="comment"># cd wordpress</span></span><br><span class="line"></span><br><span class="line">修改PHP参数，使之支持mysqli（如果已经修改可跳过）：</span><br><span class="line">[root@web wordpress]<span class="comment"># vim /usr/local/php/etc/php.ini</span></span><br><span class="line">change this (918行):</span><br><span class="line">;extension=mysqli</span><br><span class="line">to this:</span><br><span class="line">extension=mysqli</span><br></pre></td></tr></table></figure>
@@ -156,227 +114,23 @@
 
 <p>4、部署完成<br>打开地址<br><a href="http://192.169.19.135/drupal-8.8.3" target="_blank" rel="noopener">http://192.169.19.135/drupal-8.8.3</a><br>访问。</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://majunbo.top/20200509/kunpeng05-phpcms/" data-id="ckado7uf30000819x7jya3fpy" class="article-share-link">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a></li></ul>
-
-    </footer>
   </div>
-  
+  <div class="post-footer">
     
-<nav id="article-nav">
-  
-    <a href="/20200510/kunpeng06-javacms/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          鲲鹏服务器实验六：部署Java语言CMS
-        
-      </div>
-    </a>
-  
-  
-    <a href="/20200508/kunpeng04-php/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">鲲鹏服务器实验四：PHP7编译安装</div>
-    </a>
-  
-</nav>
+      <ul class="post-tag-list" itemprop="keywords"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a></li></ul>
+    
 
-  
+    <a href="#top" class="top">返回顶部</a>
+  </div>
 </article>
-
-</section>
-      
-      <aside id="sidebar">
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kunpeng/" rel="tag">kunpeng</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB/" rel="tag">知识共享</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">2</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">近期文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/20200513/kunpeng09-nginx-install/">鲲鹏服务器实验九：编译nginx</a>
-          </li>
-        
-          <li>
-            <a href="/20200512/kunpeng08-nodejscms/">鲲鹏服务器实验八：部署Node.js系统</a>
-          </li>
-        
-          <li>
-            <a href="/20200511/kunpeng07-pythoncms/">鲲鹏服务器实验七：部署Python语言系统</a>
-          </li>
-        
-          <li>
-            <a href="/20200510/kunpeng06-javacms/">鲲鹏服务器实验六：部署Java语言CMS</a>
-          </li>
-        
-          <li>
-            <a href="/20200509/kunpeng05-phpcms/">鲲鹏服务器实验五：部署PHP语言CMS</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">友情链接</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="http://arvinxiang.com" target="_blank">主题作者</a>
-          </li>
-        
-          <li>
-            <a href="http://reqianduan.com" target="_blank">热前端</a>
-          </li>
-        
-          <li>
-            <a href="http://yuancheng.work" target="_blank">远程.work</a>
-          </li>
-        
-          <li>
-            <a href="https://ljf.com/about/" target="_blank">卢敬锋，Medis作者荐</a>
-          </li>
-        
-          <li>
-            <a href="https://www.v2ex.com/member/luin" target="_blank">石墨文档技术总监</a>
-          </li>
-        
-          <li>
-            <a href="https://1024.com/" target="_blank">1024只猴子</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-      
-    </div>
-    <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 鲲鹏小哪吒   
-      <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
+<footer>
+  &copy; 2020
+  <span class="author">
+    鲲鹏小哪吒
+  </span>
+  <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
        rel="nofollow noopener">豫ICP备20009777</a>
-      <br>
-      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
-      .
-      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
-    </div>
-  </div>
 </footer>
-  </div>
-  <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav>
-  <!-- totop start -->
-<div id="totop">
-<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-</div>
-
-<!-- totop end -->
-
-
-<!-- 百度分享 start -->
-
-<!-- 百度分享 end -->
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<! -- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-                processEscapes: true
-                    
-}
-  
-        });
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-                  
-}
-    
-        });
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Queue(function() {
-            var all = MathJax.Hub.getAllJax(), i;
-            for(i=0; i < all.length; i += 1) {
-                            all[i].SourceElement().parentNode.className += ' has-jax';
-                                    
-            }
-                
-        });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-
-<script src="/js/script.js"></script>
-
-
-</div>
-</body>
+    </div>
+  </body>
 </html>
